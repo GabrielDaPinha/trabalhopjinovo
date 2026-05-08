@@ -1,0 +1,643 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
+
+header {
+  background-color: #0F172A;
+}
+
+.navbar .navbar-brand {
+  width: 150px;
+  height: auto;
+}
+.navbar .nav-item .nav-link {
+  color: #E8F1F2;
+  font-size: 16px;
+  font-weight: 500;
+}
+.navbar .nav-item .nav-link:hover {
+  color: #457CFF;
+}
+.navbar .btn-comecar {
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: 15px;
+  color: #457CFF;
+  font-size: 16px;
+  font-weight: 600;
+}
+.navbar .btn-comecar:hover {
+  background-color: #457CFF;
+  color: #fff;
+}
+
+.hero-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/FundoHero.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #E8F1F2;
+  min-height: 80vh;
+  padding: 40px 0 80px;
+  display: flex;
+  align-items: center;
+}
+.hero-section .hero-title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #E8F1F2;
+}
+.hero-section .hero-title .text-highlight {
+  color: #457CFF;
+}
+.hero-section .hero-subtitle {
+  font-size: 20px;
+  color: #E8F1F2;
+  opacity: 0.8;
+  margin-top: 20px;
+  font-weight: 500;
+}
+.hero-section .btn-iniciar,
+.hero-section .btn-demo {
+  padding: 10px 0px;
+  min-width: 130px;
+  border-radius: 20px;
+  color: #E8F1F2;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.hero-section .btn-iniciar {
+  background-color: #2B5293;
+}
+.hero-section .btn-iniciar:hover {
+  background-color: #457CFF;
+  box-shadow: 0 0 26px rgba(27, 136, 255, 0.45);
+  transform: translateY(-2px);
+}
+.hero-section .btn-demo {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid #2B5293;
+}
+.hero-section .btn-demo:hover {
+  background: #fff;
+  color: #2B5293;
+  box-shadow: 0 0 26px rgba(27, 136, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.hero-section {
+  position: relative;
+  z-index: 0;
+}
+
+.Cards-hero {
+  margin-top: -30px;
+  padding: 0 0 40px;
+  position: relative;
+  z-index: 1;
+  background-color: #0F172A;
+}
+
+.Cards-hero .card-hero {
+  position: relative;
+  background-color: #0F172A;
+  border: 2px solid #1B88E0;
+  border-radius: 28px;
+  padding: 3.5rem 1.75rem 1.75rem;
+  box-shadow: 0 0 30px rgba(27, 136, 255, 0.3);
+  overflow: visible;
+  min-height: 200px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Cards-hero .card-hero:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(15, 23, 42, 0.45);
+}
+
+.Cards-hero .elipse-icon {
+  position: absolute;
+  top: -38px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #0F172A;
+  border: 2px solid #1B88E0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(27, 136, 255, 0.3);
+  color: #457CFF;
+}
+
+.Cards-hero .elipse-icon i {
+  font-size: 35px;
+}
+
+.Cards-hero .card-body {
+  padding-top: 1rem;
+}
+
+.Cards-hero .card-title {
+  color: #E8F1F2;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.Cards-hero .card-text {
+  color: rgba(232, 241, 242, 0.82);
+  font-size: 14px;
+}
+
+/* =========================================================
+   SEÇÃO TRILHAS
+========================================================= */
+/* =========================================================
+   SEÇÃO TRILHAS
+========================================================= */
+.secao-trilhas {
+  width: 100%;
+  padding: 80px 8%;
+  background-color: #0F172A;
+}
+.secao-trilhas .subtitulo-jornada {
+  display: inline-block;
+  color: #457CFF;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.secao-trilhas .titulo-jornada {
+  color: #E8F1F2;
+  font-size: 42px;
+  font-weight: 800;
+  max-width: 800px;
+  margin: 0 auto 24px;
+  line-height: 1.2;
+}
+.secao-trilhas .descricao-jornada {
+  color: rgba(232, 241, 242, 0.75);
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.secao-trilhas .container-trilhas {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.secao-trilhas {
+  /* =========================================================
+     CARD
+  ========================================================= */
+}
+.secao-trilhas .card-trilha {
+  width: 100%;
+  min-height: 280px;
+  background: linear-gradient(135deg, rgba(7, 18, 48, 0.95), rgba(3, 10, 28, 0.98));
+  border: 1px solid rgba(27, 136, 224, 0.35);
+  border-radius: 28px;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(27, 136, 255, 0.08), inset 0 0 25px rgba(27, 136, 255, 0.04);
+  transition: 0.4s ease;
+}
+.secao-trilhas .card-trilha:hover {
+  transform: translateY(-5px);
+  border-color: rgba(69, 124, 255, 0.7);
+  box-shadow: 0 0 40px rgba(27, 136, 255, 0.2), inset 0 0 30px rgba(27, 136, 255, 0.06);
+}
+.secao-trilhas .card-trilha {
+  /* =========================================================
+     CARD INVERTIDO
+  ========================================================= */
+}
+.secao-trilhas .card-trilha.direita {
+  flex-direction: row-reverse;
+}
+.secao-trilhas .card-trilha {
+  /* =========================================================
+     ÁREA DO DRAGÃO
+  ========================================================= */
+}
+.secao-trilhas .card-trilha .area-dragao {
+  width: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.secao-trilhas .card-trilha .area-dragao img {
+  width: 100%;
+  max-width: 220px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  filter: drop-shadow(0 0 20px rgba(27, 136, 255, 0.45));
+}
+.secao-trilhas .card-trilha {
+  /* =========================================================
+     CONTEÚDO
+  ========================================================= */
+}
+.secao-trilhas .card-trilha .conteudo-trilha {
+  flex: 1;
+}
+.secao-trilhas .card-trilha .conteudo-trilha .nivel {
+  display: inline-flex;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(27, 57, 173, 0.18);
+  border: 1px solid rgba(69, 124, 255, 0.45);
+  color: #457CFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.secao-trilhas .card-trilha .conteudo-trilha h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #E8F1F2;
+  margin-bottom: 14px;
+}
+.secao-trilhas .card-trilha .conteudo-trilha p {
+  color: rgba(232, 241, 242, 0.7);
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+.secao-trilhas .card-trilha {
+  /* =========================================================
+     PROGRESSO
+  ========================================================= */
+}
+.secao-trilhas .card-trilha .titulo-progresso {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: rgba(232, 241, 242, 0.85);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.secao-trilhas .card-trilha .barra-progresso {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.secao-trilhas .card-trilha .barra-progresso .progresso {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1B39AD, #1B88E0);
+  box-shadow: 0 0 15px rgba(27, 136, 255, 0.6);
+}
+.secao-trilhas .card-trilha {
+  /* =========================================================
+     BOTÃO
+  ========================================================= */
+}
+.secao-trilhas .card-trilha button {
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(69, 124, 255, 0.5);
+  background: rgba(27, 57, 173, 0.18);
+  color: #E8F1F2;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.secao-trilhas .card-trilha button:hover {
+  background: #2B5293;
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(27, 136, 255, 0.5);
+}
+
+/* =========================================================
+   SEÇÕES ADICIONADAS
+========================================================= */
+.about-section {
+  background-image: radial-gradient(rgba(7, 18, 48, 0.95) 2px, #0F172A 2px);
+  background-size: 30px 30px;
+  position: relative;
+}
+
+.concept-box {
+  background-color: rgba(7, 18, 48, 0.95);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.team-card {
+  background-color: rgba(7, 18, 48, 0.95);
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  color: #E8F1F2;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.2);
+}
+
+.team-img-box {
+  width: 80px;
+  height: 80px;
+  background-color: #1B88E0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  color: white;
+}
+
+.about-icon-glow {
+  position: relative;
+}
+
+.floating-img {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.text-gray {
+  color: #E8F1F2 !important;
+}
+
+.overlap-section {
+  margin-top: -100px;
+  position: relative;
+  z-index: 10;
+  padding: 80px 0;
+}
+
+.feature-card {
+  background-color: rgba(7, 18, 48, 0.95);
+  padding: 40px 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+}
+
+.icon-box {
+  width: 60px;
+  height: 60px;
+  background-color: #1B88E0;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  font-size: 1.5rem;
+  color: white;
+}
+
+/* =========================================================
+   RESET DE ESPAÇAMENTO
+========================================================= */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0F172A;
+  overflow-x: hidden;
+}
+
+main {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+  background: linear-gradient(180deg, rgb(8, 15, 35) 0%, rgb(5, 10, 25) 100%);
+  border-top: 1px solid rgba(69, 124, 255, 0.25);
+  padding: 70px 0 40px;
+  position: relative;
+  overflow: hidden;
+}
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #457CFF, transparent);
+}
+
+.stats-custom {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.stats-custom .row {
+  margin: 0;
+}
+.stats-custom .col-6,
+.stats-custom .col-md-3 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 20px;
+  transform: none !important;
+}
+.stats-custom h4 {
+  color: #E8F1F2;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+.stats-custom p {
+  color: rgba(232, 241, 242, 0.7);
+  margin: 0;
+  font-size: 14px;
+}
+.stats-custom img {
+  max-width: 180px;
+  opacity: 0.95;
+}
+.stats-custom i {
+  font-size: 3.5rem;
+}
+
+/* =========================================================
+   HOVER SUAVE
+========================================================= */
+.stats-custom .col-6:hover,
+.stats-custom .col-md-3:hover {
+  transform: translateY(-4px);
+  transition: 0.3s ease;
+}
+
+.stats-custom .col-6:hover i,
+.stats-custom .col-md-3:hover i {
+  filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
+}
+
+.stat-item h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #E8F1F2;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  color: rgba(232, 241, 242, 0.75);
+  margin-bottom: 0;
+}
+
+.text-primary-emphasis {
+  color: #457CFF !important;
+}
+
+@media (min-width: 992px) {
+  .nav-item.dropdown .dropdown-menu {
+    display: block !important;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(15px);
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  .nav-item.dropdown .dropdown-menu.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+}
+@media (max-width: 991px) {
+  .dropdown-menu {
+    min-width: 100% !important;
+  }
+}
+.neon-vazado {
+  color: transparent !important;
+  -webkit-text-stroke: 1.5px #00d2ff;
+  filter: drop-shadow(0 0 5px #00d2ff);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover .neon-vazado {
+  -webkit-text-stroke: 1.5px #fff;
+  filter: drop-shadow(0 0 10px #00d2ff) drop-shadow(0 0 20px #00d2ff);
+}
+
+.brand-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-size: 1.25rem;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
+}
+
+.navbar-nav .nav-link:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
+}
+
+.navbar-nav .nav-link.active {
+  color: #ffffff !important;
+  text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
+}
+
+.hero-fixed h1 .text-primary-emphasis {
+  color: #00d2ff !important;
+  text-shadow: 0 0 3px rgba(0, 210, 255, 0.4), 0 0 6px rgba(0, 210, 255, 0.2);
+  font-weight: 800;
+  display: inline-block;
+}
+
+.neon-sobre-wevers {
+  color: #00d2ff !important;
+  text-shadow: 0 0 3px rgba(0, 210, 255, 0.4), 0 0 6px rgba(0, 210, 255, 0.2);
+  font-weight: 800;
+  display: inline-block;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+@media (max-width: 900px) {
+  .secao-trilhas .card-trilha,
+  .secao-trilhas .card-trilha.direita {
+    flex-direction: column;
+    text-align: center;
+  }
+  .secao-trilhas .titulo-progresso {
+    text-align: left;
+  }
+  .secao-trilhas .area-dragao {
+    width: 100%;
+  }
+  .secao-trilhas .conteudo-trilha p {
+    max-width: 100%;
+  }
+}/*# sourceMappingURL=style.css.map */
+
+.margem-nos {
+    padding: 1.5rem !important;
+}
+
+.navazulbg {
+    background-color: #0F172A !important;
+}
+
+.fontenav {
+    color: #ffffff !important;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);}
