@@ -642,9 +642,41 @@ footer::before {
     transition: all 0.3s ease;
     text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);}
 
-.stats-custom-footer {
-    background: linear-gradient(135deg, rgba(27, 57, 173, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
-    border-top: 2px solid #457CFF;
-    border-bottom: 2px solid rgba(69, 124, 255, 0.3);
-    padding: 60px 0;
-    position: relative;}
+.footer-stats-custom {
+  background: linear-gradient(135deg, rgba(27, 57, 173, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border-top: 2px solid #457CFF;
+  border-bottom: 2px solid rgba(69, 124, 255, 0.3);
+  padding: 60px 0;
+  position: relative;
+}
+.footer-stats-custom::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #457CFF, transparent);
+}
+
+.footer-stats-custom .col-6:hover,
+.footer-stats-custom .col-md-3:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: #457CFF !important;
+  box-shadow: 0 20px 40px rgba(69, 124, 255, 0.25), inset 0 0 20px rgba(69, 124, 255, 0.08), 0 0 20px rgba(69, 124, 255, 0.15) !important;
+  background: linear-gradient(135deg, rgba(7, 18, 48, 0.98) 0%, rgba(20, 35, 70, 0.98) 100%) !important;
+}
+.footer-stats-custom .col-6:hover::before,
+.footer-stats-custom .col-md-3:hover::before {
+  opacity: 1;
+}
+.footer-stats-custom .col-6:hover h4,
+.footer-stats-custom .col-md-3:hover h4 {
+  color: #fff;
+  text-shadow: 0 0 10px #457CFF;
+}
+.footer-stats-custom .col-6 > *,
+.footer-stats-custom .col-md-3 > * {
+  position: relative;
+  z-index: 1;
+}
