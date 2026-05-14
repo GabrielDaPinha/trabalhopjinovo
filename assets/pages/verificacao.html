@@ -1,91 +1,58 @@
 <!doctype html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verificação | Apiscale</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"rel="stylesheet"/>
-    <link rel="stylesheet" href="../css/cadastro.css" />
-    <link rel="icon" type="image/x-icon" href="../images/logocortada.png">
-  </head>
-  <body>
-    <main class="auth-page">
-      <section class="auth-shell verify-shell" aria-labelledby="verify-title">
-        <article class="auth-card verify-card">
-          <a
-            class="brand"
-            href="../../index.html"
-            aria-label="Voltar ao início da APISCALE"
-          >
-            <img src="../images/logocortada.png" alt="Logo Apiscale" style="width: 100px !important; height: auto !important;">
-                <span class="brand-text">APISCALE</span>
-          </a>
 
-          <div class="security-mark" aria-hidden="true">
-            <span></span>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificação | Apiscale</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/cadastro.css" />
+  <link rel="icon" type="image/x-icon" href="../images/logocortada.png">
+</head>
+
+<body>
+  <main class="auth-page">
+    <section class="auth-shell verify-shell" aria-labelledby="verify-title">
+      <article class="auth-card verify-card">
+        <a class="brand" href="../../index.html" aria-label="Voltar ao início da APISCALE">
+          <img src="../images/logocortada.png" alt="Logo Apiscale"
+            style="width: 100px !important; height: auto !important;">
+          <span class="brand-text">APISCALE</span>
+        </a>
+
+        <div class="security-mark" aria-hidden="true">
+          <span></span>
+        </div>
+
+        <div class="auth-heading compact">
+          <span class="eyebrow">Verificação em 2 etapas</span>
+          <h1 id="verify-title">Proteção extra ativada</h1>
+          <p>Enviamos um código de verificação para seu e-mail.</p>
+        </div>
+
+        <form class="auth-form" action="#" method="post">
+          <fieldset class="code-group" aria-label="Código de verificação com 6 dígitos">
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 1" />
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 2" />
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 3" />
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 4" />
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 5" />
+            <input type="text" inputmode="numeric" maxlength="1" aria-label="Dígito 6" />
+          </fieldset>
+
+          <div class="button-stack verify-actions">
+            <!-- Não sei como vai ser depois disso discutir -->
+            <button class="btn btn-primary" type="submit">
+              Verificar código
+            </button>
+            <a class="btn btn-secondary" href="login.html">Voltar ao login</a>
           </div>
+        </form>
+      </article>
+    </section>
+  </main>
+</body>
 
-          <div class="auth-heading compact">
-            <span class="eyebrow">Verificação em 2 etapas</span>
-            <h1 id="verify-title">Proteção extra ativada</h1>
-            <p>Enviamos um código de verificação para seu e-mail.</p>
-          </div>
-
-          <form class="auth-form" action="#" method="post">
-            <fieldset
-              class="code-group"
-              aria-label="Código de verificação com 6 dígitos"
-            >
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 1"
-              />
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 2"
-              />
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 3"
-              />
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 4"
-              />
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 5"
-              />
-              <input
-                type="text"
-                inputmode="numeric"
-                maxlength="1"
-                aria-label="Dígito 6"
-              />
-            </fieldset>
-
-            <div class="button-stack verify-actions">
-              <!-- Não sei como vai ser depois disso discutir -->
-              <button class="btn btn-primary" type="submit">
-                Verificar código
-              </button>
-              <a class="btn btn-secondary" href="login.html">Voltar ao login</a>
-            </div>
-          </form>
-        </article>
-      </section>
-    </main>
-  </body>
 </html>
