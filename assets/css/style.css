@@ -642,49 +642,63 @@ footer::before {
     transition: all 0.3s ease;
     text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);}
 
-.stats-suporte {
-    background: linear-gradient(135deg, rgba(27, 57, 173, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+/* ESTILO EXATO DO SUPORTE */
+.segundo-stats-custom {
+    background: linear-gradient(135deg, rgba(27, 57, 173, 0.15) 0%, rgba(15, 23, 42, 1) 100%) !important;
     border-top: 2px solid #457CFF !important;
     border-bottom: 2px solid rgba(69, 124, 255, 0.3) !important;
     padding: 60px 0 !important;
     position: relative;
-    transition: all 0.3s ease;
+    overflow: hidden;
 }
 
-.stats-suporte::before {
+.segundo-stats-custom::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #457CFF, transparent);
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #457CFF, #00d2ff, transparent);
+    z-index: 10;
 }
 
-/* Aplicando os efeitos de hover apenas quando estiver dentro da stats-suporte */
-.stats-suporte .col-6, .stats-suporte .col-md-3 {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid transparent;
-    border-radius: 15px;
-    padding: 20px;
+.segundo-stats-custom h4 {
+    color: #FFFFFF !important;
+    font-weight: 800 !important;
+    opacity: 1 !important; 
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-.stats-suporte .col-6:hover,
-.stats-suporte .col-md-3:hover {
-    transform: translateY(-8px) scale(1.02) !important;
-    border-color: rgba(69, 124, 255, 0.4) !important;
-    box-shadow: 0 20px 40px rgba(69, 124, 255, 0.25), 
-                inset 0 0 20px rgba(69, 124, 255, 0.08), 
-                0 0 20px rgba(69, 124, 255, 0.15) !important;
-    background: linear-gradient(135deg, rgba(7, 18, 48, 0.98) 0%, rgba(20, 35, 70, 0.98) 100%) !important;
+.segundo-stats-custom p {
+    color: #457CFF !important;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    margin-bottom: 0;
 }
 
-.stats-suporte h4 {
-    transition: all 0.3s ease;
+.segundo-stats-custom .col-6, 
+.segundo-stats-custom .col-md-3 {
+    transition: all 0.3s ease-in-out !important;
+    border-radius: 20px;
+    padding: 30px 15px !important;
 }
 
-.stats-suporte .col-6:hover h4,
-.stats-suporte .col-md-3:hover h4 {
-    color: #fff !important;
-    text-shadow: 0 0 10px #457CFF !important;
+.segundo-stats-custom .col-6:hover,
+.segundo-stats-custom .col-md-3:hover {
+    transform: translateY(-10px) scale(1.05) !important;
+    background: rgba(69, 124, 255, 0.1) !important;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(69, 124, 255, 0.2) !important;
+}
+
+.segundo-stats-custom .col-6:hover i,
+.segundo-stats-custom .col-md-3:hover i {
+    filter: drop-shadow(0 0 15px #457CFF) !important;
+    -webkit-text-stroke: 1.5px #fff !important;
+}
+
+.segundo-stats-custom .col-6:hover h4 {
+    text-shadow: 0 0 15px #457CFF !important;
 }
