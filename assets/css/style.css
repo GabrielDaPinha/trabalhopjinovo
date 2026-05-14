@@ -465,42 +465,54 @@ footer::before {
 }
 
 .stats-custom {
-  background: linear-gradient(135deg, rgba(27, 57, 173, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%);
-  border-top: 2px solid #457CFF;
-  border-bottom: 2px solid rgba(69, 124, 255, 0.3);
-  padding: 60px 0;
-  position: relative;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
 }
-.stats-custom::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #457CFF, transparent);
+.stats-custom .row {
+  margin: 0;
+}
+.stats-custom .col-6,
+.stats-custom .col-md-3 {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 20px;
+  transform: none !important;
+}
+.stats-custom h4 {
+  color: #E8F1F2;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+.stats-custom p {
+  color: rgba(232, 241, 242, 0.7);
+  margin: 0;
+  font-size: 14px;
+}
+.stats-custom img {
+  max-width: 180px;
+  opacity: 0.95;
+}
+.stats-custom i {
+  font-size: 3.5rem;
 }
 
+/* =========================================================
+   HOVER SUAVE
+========================================================= */
 .stats-custom .col-6:hover,
 .stats-custom .col-md-3:hover {
-  transform: translateY(-8px) scale(1.02) !important;
-  border-color: #457CFF !important;
-  box-shadow: 0 20px 40px rgba(69, 124, 255, 0.25), inset 0 0 20px rgba(69, 124, 255, 0.08), 0 0 20px rgba(69, 124, 255, 0.15) !important;
-  background: linear-gradient(135deg, rgba(7, 18, 48, 0.98) 0%, rgba(20, 35, 70, 0.98) 100%) !important;
+  transform: translateY(-4px);
+  transition: 0.3s ease;
 }
-.stats-custom .col-6:hover::before,
-.stats-custom .col-md-3:hover::before {
-  opacity: 1;
-}
-.stats-custom .col-6:hover h4,
-.stats-custom .col-md-3:hover h4 {
-  color: #fff;
-  text-shadow: 0 0 10px #457CFF;
-}
-.stats-custom .col-6 > *,
-.stats-custom .col-md-3 > * {
-  position: relative;
-  z-index: 1;
+
+.stats-custom .col-6:hover i,
+.stats-custom .col-md-3:hover i {
+  filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
 }
 
 .stat-item h3 {
