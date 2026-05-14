@@ -641,3 +641,50 @@ footer::before {
     font-weight: 500;
     transition: all 0.3s ease;
     text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);}
+
+.stats-suporte {
+    background: linear-gradient(135deg, rgba(27, 57, 173, 0.08) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+    border-top: 2px solid #457CFF !important;
+    border-bottom: 2px solid rgba(69, 124, 255, 0.3) !important;
+    padding: 60px 0 !important;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.stats-suporte::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #457CFF, transparent);
+}
+
+/* Aplicando os efeitos de hover apenas quando estiver dentro da stats-suporte */
+.stats-suporte .col-6, .stats-suporte .col-md-3 {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid transparent;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.stats-suporte .col-6:hover,
+.stats-suporte .col-md-3:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: rgba(69, 124, 255, 0.4) !important;
+    box-shadow: 0 20px 40px rgba(69, 124, 255, 0.25), 
+                inset 0 0 20px rgba(69, 124, 255, 0.08), 
+                0 0 20px rgba(69, 124, 255, 0.15) !important;
+    background: linear-gradient(135deg, rgba(7, 18, 48, 0.98) 0%, rgba(20, 35, 70, 0.98) 100%) !important;
+}
+
+.stats-suporte h4 {
+    transition: all 0.3s ease;
+}
+
+.stats-suporte .col-6:hover h4,
+.stats-suporte .col-md-3:hover h4 {
+    color: #fff !important;
+    text-shadow: 0 0 10px #457CFF !important;
+}
