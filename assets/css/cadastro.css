@@ -583,3 +583,12 @@ h2 {
     }
 }
 
+.brand-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+    color: #fff !important;
+    text-transform: uppercase;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+}
