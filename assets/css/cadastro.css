@@ -1,0 +1,585 @@
+
+
+:root {
+    /* O :root guarda variáveis globais que podem ser usadas no CSS inteiro. */
+    /* Variáveis de cor da paleta principal. */
+    --cor-fundo: #13293d;
+    --cor-card: #0f172a;
+    --azul-principal: #3b82f6;
+    --azul-escuro: #1b39ad;
+    --azul-claro: #457cff;
+    --verde-agua: #009694;
+    --azul-medio: #1b88e0;
+    --texto-principal: #e8f1f2;
+    --texto-suave: #b7c8d0;
+    --cor-borda: rgba(69, 124, 255, 0.24);
+
+    /* Variáveis de aparência usadas em cards e elementos arredondados. */
+    --sombra-card: 0 16px 40px rgba(0, 0, 0, 0.32);
+    --borda-arredondada: 16px;
+}
+
+/* O seletor universal (*) aplica essa regra para todos os elementos. */
+* {
+    /* Faz padding e borda entrarem no cálculo da largura do elemento. */
+    box-sizing: border-box;
+}
+
+html {
+    /* Deixa a rolagem mais suave quando usamos links com âncora. */
+    scroll-behavior: smooth;
+}
+
+body {
+    /* Garante que o corpo da página ocupe pelo menos a altura inteira da tela. */
+    min-height: 100vh;
+
+    /* Remove a margem padrão que o navegador coloca no body. */
+    margin: 0;
+
+    /* Define a fonte principal e uma fonte reserva caso a Inter não carregue. */
+    font-family: "Inter", Arial, sans-serif;
+
+    /* Usa a variável de cor do texto. */
+    color: var(--texto-principal);
+
+    /* Usa a cor sólida de fundo definida no :root. */
+    background: var(--cor-fundo);
+}
+
+a {
+    /* Faz o link herdar a cor do elemento pai. */
+    color: inherit;
+
+    /* Remove o sublinhado padrão dos links. */
+    text-decoration: none;
+}
+
+button,
+input {
+    /* Faz botões e inputs usarem a mesma fonte do restante da página. */
+    font: inherit;
+}
+
+.auth-page {
+    /* Container geral das páginas de autenticação. */
+    position: relative;
+
+    /* Mantém a página ocupando a altura inteira da tela. */
+    min-height: 100vh;
+
+    /* Evita barra de rolagem horizontal caso algum item passe um pouco da largura. */
+    overflow-x: hidden;
+
+    /* Espaçamento interno da página. */
+    padding: 42px 18px;
+
+    /* Isola efeitos visuais dentro desse contexto. */
+    isolation: isolate;
+}
+
+/* =============================
+   Layout principal
+============================= */
+
+.auth-shell {
+    /* Limita a largura máxima do conteúdo. */
+    width: min(1120px, 100%);
+
+    /* Altura mínima descontando o padding vertical da página. */
+    min-height: calc(100vh - 84px);
+
+    /* Centraliza o container na tela. */
+    margin: 0 auto;
+
+    /* Grid ajuda a centralizar e organizar os cards. */
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    /* Espaço entre cards quando existir mais de um. */
+    gap: 24px;
+}
+
+.auth-shell-login {
+    /* Define uma coluna para o card de login. */
+    grid-template-columns: minmax(310px, 480px);
+}
+
+.verify-shell {
+    /* Deixa a página de verificação um pouco mais estreita. */
+    width: min(520px, 100%);
+}
+
+.signup-shell {
+    /* O cadastro precisa de mais largura porque possui mais campos. */
+    width: min(840px, 100%);
+}
+
+.auth-card {
+    /* Card usado nas telas de login, cadastro e verificação. */
+    position: relative;
+    width: 100%;
+
+    /* Espaço interno do card. */
+    padding: 32px;
+
+    /* Esconde qualquer conteúdo que passe das bordas arredondadas. */
+    overflow: hidden;
+
+    /* Borda fina com a cor definida na variável --cor-borda. */
+    border: 1px solid var(--cor-borda);
+
+    /* Bordas arredondadas usando a variável global. */
+    border-radius: var(--borda-arredondada);
+
+    /* Cor de fundo do card. */
+    background: var(--cor-card);
+
+    /* Sombra para destacar o card do fundo. */
+    box-shadow: var(--sombra-card);
+}
+
+.verify-card {
+    /* Organiza os elementos da verificação em coluna. */
+    display: flex;
+    flex-direction: column;
+
+    /* Centraliza o conteúdo verticalmente dentro do card. */
+    justify-content: center;
+
+    /* Garante uma altura mínima para o card não ficar muito achatado. */
+    min-height: 420px;
+}
+
+.signup-card {
+    /* clamp define um valor mínimo, ideal e máximo para o padding lateral. */
+    padding: 34px clamp(22px, 5vw, 42px);
+}
+
+.brand {
+    /* Link que envolve a logo. */
+    display: inline-flex;
+    align-items: center;
+
+    /* Limita o tamanho da logo. */
+    max-width: 205px;
+    margin-bottom: 24px;
+
+    /* Suaviza a mudança de opacidade no hover. */
+    transition: opacity 0.2s ease;
+}
+
+.brand:hover {
+    /* Efeito simples quando passa o mouse na logo. */
+    opacity: 0.86;
+}
+
+.brand img {
+    /* Faz a imagem respeitar o tamanho da .brand. */
+    display: block;
+    width: 100%;
+
+    /* Mantém a proporção original da imagem. */
+    height: auto;
+}
+
+.auth-heading {
+    /* Espaçamento entre o cabeçalho e o formulário. */
+    margin-bottom: 26px;
+}
+
+.auth-heading.compact {
+    /* Versão mais compacta e centralizada, usada na verificação. */
+    margin-bottom: 22px;
+    text-align: center;
+}
+
+.eyebrow {
+    /* Texto pequeno acima do título. */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    color: var(--azul-claro);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.eyebrow::before {
+    /* Cria a bolinha decorativa antes do texto sem precisar colocar no HTML. */
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--verde-agua);
+}
+
+h1,
+h2,
+p {
+    /* Remove a margem superior padrão desses elementos. */
+    margin-top: 0;
+}
+
+h1 {
+    /* Título principal das páginas. */
+    margin-bottom: 12px;
+
+    /* clamp deixa o título responsivo sem exagerar no tamanho. */
+    font-size: clamp(1.8rem, 4vw, 2.45rem);
+    line-height: 1.1;
+    letter-spacing: 0;
+}
+
+h2 {
+    /* Título secundário, caso a página use h2. */
+    margin-bottom: 12px;
+    font-size: clamp(1.45rem, 3vw, 1.9rem);
+    line-height: 1.15;
+    letter-spacing: 0;
+}
+
+.auth-heading p,
+.auth-footer {
+    /* Cor e espaçamento de textos auxiliares. */
+    color: var(--texto-suave);
+    line-height: 1.7;
+}
+
+/* =============================
+   Forms
+============================= */
+
+.auth-form {
+    /* Deixa os campos do formulário empilhados. */
+    display: grid;
+
+    /* Espaçamento entre os campos. */
+    gap: 18px;
+}
+
+.field {
+    /* Cada campo possui label e input organizados em coluna. */
+    display: grid;
+    gap: 8px;
+}
+
+.field label {
+    /* Estilo dos textos acima dos inputs. */
+    color: #dcecff;
+    font-size: 0.88rem;
+    font-weight: 700;
+}
+
+.field input,
+.code-group input {
+    /* Estilo base dos inputs comuns e dos inputs do código 2FA. */
+    width: 100%;
+    min-height: 52px;
+    border: 1px solid rgba(69, 124, 255, 0.22);
+    border-radius: 10px;
+    outline: none;
+    color: var(--texto-principal);
+    background: #13293d;
+
+    /* Suaviza as mudanças quando o input recebe foco. */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.field input {
+    /* Espaçamento interno horizontal dos inputs normais. */
+    padding: 0 16px;
+}
+
+.field input::placeholder {
+    /* Cor do texto de exemplo dentro dos inputs. */
+    color: rgba(169, 184, 204, 0.62);
+}
+
+.field input:focus,
+.code-group input:focus {
+    /* Estilo quando o usuário clica ou navega até o input. */
+    border-color: var(--azul-claro);
+    background: #0f172a;
+    box-shadow: 0 0 0 3px rgba(69, 124, 255, 0.18);
+}
+
+.form-links {
+    /* Alinha links pequenos, como "Esqueci minha senha", à direita. */
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.88rem;
+}
+
+.form-links a,
+.auth-footer a {
+    /* Estilo dos links importantes dentro das telas de autenticação. */
+    color: var(--azul-claro);
+    font-weight: 800;
+}
+
+.form-links a:hover,
+.auth-footer a:hover {
+    /* Mostra sublinhado ao passar o mouse para indicar que é clicável. */
+    text-decoration: underline;
+}
+
+.button-stack {
+    /* Organiza dois botões lado a lado. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.btn {
+    /* Classe base de todos os botões e links com aparência de botão. */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 52px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--texto-principal);
+    font-weight: 700;
+    letter-spacing: 0;
+
+    /* Transição suave para hover. */
+    transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover {
+    /* Feedback simples ao passar o mouse. */
+    opacity: 0.9;
+}
+
+.btn-primary {
+    /* Botão principal da tela. */
+    background: var(--azul-principal);
+    box-shadow: none;
+}
+
+.btn-primary:hover {
+    /* Cor do botão principal no hover. */
+    background: var(--azul-escuro);
+}
+
+.btn-secondary {
+    /* Botão secundário, usado para ações menos importantes. */
+    border: 1px solid rgba(69, 124, 255, 0.28);
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    /* Hover do botão secundário. */
+    border-color: var(--azul-claro);
+    background: rgba(69, 124, 255, 0.08);
+}
+
+.auth-footer {
+    /* Texto no rodapé do card, como "Criar conta" ou "Entrar". */
+    margin: 22px 0 0;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* =============================
+   Visual 2FA section
+============================= */
+
+.security-mark {
+    /* Desenha o escudo da página de verificação. */
+    width: 76px;
+    height: 86px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+
+    /* clip-path recorta o elemento no formato de escudo. */
+    clip-path: polygon(50% 0, 88% 15%, 82% 68%, 50% 100%, 18% 68%, 12% 15%);
+    background: var(--verde-agua);
+}
+
+.security-mark span {
+    /* Parte principal do cadeado dentro do escudo. */
+    width: 42px;
+    height: 32px;
+    position: relative;
+    border: 4px solid #e7f8ff;
+    border-radius: 8px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.security-mark span::before {
+    /* Cria a haste superior do cadeado. */
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    width: 26px;
+    height: 24px;
+    border: 4px solid #e7f8ff;
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+    transform: translateX(-50%);
+}
+
+.code-group {
+    /* Grupo dos 6 inputs do código de verificação. */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+
+    /* Remove estilos padrão do fieldset. */
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.code-group input {
+    /* Centraliza o número digitado em cada caixinha. */
+    padding: 0;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.verify-actions {
+    /* Pequeno respiro acima dos botões da página de verificação. */
+    margin-top: 4px;
+}
+
+/* =============================
+   Signup switch and panels
+============================= */
+
+.account-toggle {
+    /* Área que contém os radios e os painéis PF/PJ. */
+    display: grid;
+    gap: 20px;
+}
+
+.account-toggle > input {
+    /* Esconde os radio buttons reais, mas eles continuam funcionando. */
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle-control {
+    /* Visual do seletor Pessoa Física / Pessoa Jurídica. */
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 54px;
+    padding: 5px;
+    border: 1px solid rgba(69, 124, 255, 0.28);
+    border-radius: 12px;
+    background: #13293d;
+}
+
+.toggle-control label {
+    /* Cada label funciona como uma opção clicável do seletor. */
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--texto-suave);
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: color 0.22s ease;
+}
+
+.toggle-indicator {
+    /* Barra azul que mostra qual opção está selecionada. */
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: calc(50% - 5px);
+    height: calc(100% - 10px);
+    border-radius: 8px;
+    background: var(--azul-principal);
+    box-shadow: none;
+    transition: transform 0.28s ease;
+}
+
+#person-fisica:checked ~ .toggle-control label[for="person-fisica"],
+#person-juridica:checked ~ .toggle-control label[for="person-juridica"] {
+    /* Muda a cor do texto da opção selecionada. */
+    color: #ffffff;
+}
+
+#person-juridica:checked ~ .toggle-control .toggle-indicator {
+    /* Quando PJ está marcado, move o indicador para a direita. */
+    transform: translateX(100%);
+}
+
+.signup-panels {
+    /* Coloca os painéis PF e PJ na mesma área. */
+    display: grid;
+}
+
+.fields-panel {
+    /* Painéis com os campos de Pessoa Física ou Pessoa Jurídica. */
+    grid-area: 1 / 1;
+
+    /* Começa escondido; o CSS mostra o painel conforme o radio marcado. */
+    display: none;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+
+    /* Aplica uma animação suave quando o painel aparece. */
+    animation: panelReveal 0.28s ease both;
+}
+
+#person-fisica:checked ~ .signup-panels .physical-panel,
+#person-juridica:checked ~ .signup-panels .company-panel {
+    /* Mostra o painel correto conforme a opção selecionada. */
+    display: grid;
+}
+
+
+
+.terms {
+    /* Linha do checkbox de aceite dos termos. */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--texto-suave);
+    font-size: 0.94rem;
+    line-height: 1.4;
+}
+
+.terms input {
+    /* Tamanho e cor do checkbox. */
+    width: 18px;
+    height: 18px;
+    accent-color: var(--verde-agua);
+}
+
+/* =============================
+   Animações e responsividade
+============================= */
+
+@keyframes panelReveal {
+    /* Estado inicial da animação: invisível e um pouco abaixo. */
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    /* Estado final da animação: visível e na posição normal. */
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
