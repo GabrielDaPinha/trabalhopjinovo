@@ -7,5 +7,4 @@ MILLENA SANTOS CAMPIOTO
 PEDRO SILVA ROCHA
 THIAGO VIEIRA DE ALMEIDA
 ----------------------
-
 Apiscale é um projeto educacional ainda em desenvolvimento, apenas com desktop integrado de exemplo e sem responsividade ou backend.
