@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apiscale</title>
+
+  <link rel="icon" type="image/x-icon" href="../images/logocortada.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+
+  <link rel="stylesheet" href="../css/planos.css" />
+  
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top navazulbg" data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+          <img src="../images/logocortada.png" alt="Logo Apiscale" width="50" height="50">
+          <span class="brand-text">APISCALE</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mx-auto gap-lg-3">
+            <li class="nav-item"><a class="nav-link text-white" href="../../index.html">Início</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../index.html#sobre">Sobre</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../index.html#ferramentas">Ferramentas</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="../../index.html#jornadas">Jornadas</a></li>
+            <li class="nav-item"><a class="nav-link text-white" href="Suporte.html">Suporte</a></li>
+            <li class="nav-item"><a class="nav-link text-white active" href="./planos.html">Planos</a></li>
+          </ul>
+
+          <a href="login.html" class="btn btn-light fw-bold">Começar Agora</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="planos-section">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="eyebrow justify-content-center">Escolha seu plano</span>
+          <h2 class="display-5 fw-bold text-white">Planos que <span class="text-primary-emphasis neon-sobre-wevers-ativar?">escalam</span> com você</h2>
+          <p class="text-secondary">Preços diferenciados para Pessoa Física e Jurídica. Cancele quando quiser.</p>
+        </div>
+
+        <div id="tipoSelectorWrapper" class="toggle-planos">
+          <div class="account-toggle" aria-label="Tipo de conta">
+            <input type="radio" id="plano-pf" name="tipo-plano" value="pf" checked>
+            <input type="radio" id="plano-pj" name="tipo-plano" value="pj">
+            <div class="toggle-control">
+              <label for="plano-pf">Pessoa Física</label>
+              <label for="plano-pj">Pessoa Jurídica</label>
+              <span class="toggle-indicator"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4 justify-content-center" id="planosContainer"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <section class="stats-custom">
+      <div class="container">
+        <div class="d-flex row text-center g-4">
+          <div class="col-6 col-md-3">
+            <div class="h-100 p-3 d-flex flex-column align-items-center">
+              <i class="fa-brands fa-instagram neon-vazado fa-5x"></i>
+              <h4 class="fw-bold mt-3">@_apiscale_</h4>
+              <p class="text-secondary mt-auto">Nosso Instagram</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h-100 p-3 d-flex flex-column align-items-center">
+              <i class="fa-solid fa-at neon-vazado fa-5x"></i>
+              <h4 class="fw-bold mt-3">E-Mail</h4>
+              <p class="text-secondary">apiscalecontato@gmail.com</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h-100 p-3 d-flex flex-column align-items-center">
+              <i class="fa-solid fa-phone neon-vazado fa-5x"></i>
+              <h4 class="fw-bold mt-3">(19) 99658-4146</h4>
+              <p class="text-secondary">Telefone para Contato</p>
+            </div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h-100 p-3 d-flex flex-column align-items-center">
+              <div class="d-flex align-items-center justify-content-center" style="height: 56px;">
+                <img src="../images/logocortada.png" alt="Mascote" class="img-fluid" style="max-height: 100%;">
+              </div>
+              <h4 class="fw-bold mt-3">APISCALE</h4>
+              <p class="text-secondary mt-auto">Nós</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const precos = {
+      pf: {
+        essencial: 29.90,
+        avancado: 59.90,
+        empresarial: 99.90
+      },
+      pj: {
+        essencial: 99.90,
+        avancado: 199.90,
+        empresarial: 399.90
+      }
+    };
+
+    const recursos = {
+      essencial: ['Até 5 usuários', 'Métricas básicas', 'Suporte por e-mail', '1 jornada personalizada', 'suporte 12h'],
+      avancado: ['Até 20 usuários', 'Métricas avançadas + OKRs', 'Suporte prioritário', '3 jornadas personalizadas', 'Acompanhamento de progresso ao vivo'],
+      empresarial: ['Usuários ilimitados', 'Business Intelligence', 'Suporte 24/7 dedicado', 'Jornadas personalizadas ilimitadas', 'Onboarding estratégico']
+    };
+
+    let tipoAtual = 'pf';
+
+    function exibirPlanos(tipo) {
+      const container = document.getElementById('planosContainer');
+      const planos = [
+        { id: 'essencial', nome: 'Essencial', preco: precos[tipo].essencial, cor: '#457CFF' },
+        { id: 'avancado', nome: 'Avançado', preco: precos[tipo].avancado, cor: '#1B88E0' },
+        { id: 'empresarial', nome: 'Empresarial', preco: precos[tipo].empresarial, cor: '#009694' }
+      ];
+
+      container.innerHTML = planos.map(plano => `
+        <div class="col-md-6 col-lg-4">
+          <div class="pricing-card text-white">
+            <h3 class="fw-bold">${plano.nome}</h3>
+            <div class="preco">R$ ${plano.preco.toFixed(2).replace('.', ',')}<small>/mês</small></div>
+            <ul>
+              ${recursos[plano.id].map(r => `<li><i class="bi bi-check-circle-fill"></i> ${r}</li>`).join('')}
+            </ul>
+            <button class="btn btn-plano" data-plano="${plano.id}" data-tipo="${tipo}">Assinar agora</button>
+          </div>
+        </div>
+      `).join('');
+
+      document.querySelectorAll('.btn-plano').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const plano = btn.dataset.plano;
+          const tipoConta = btn.dataset.tipo;
+          alert(`Redirecionando para checkout do plano ${plano} (${tipoConta === 'pf' ? 'Pessoa Física' : 'Pessoa Jurídica'}).\nValor: R$ ${precos[tipoConta][plano].toFixed(2).replace('.', ',')}`);
+        });
+      });
+    }
+
+    function configurarSeletor() {
+      const radioPf = document.getElementById('plano-pf');
+      const radioPj = document.getElementById('plano-pj');
+
+      radioPf.checked = true;
+      tipoAtual = 'pf';
+      exibirPlanos(tipoAtual);
+
+      radioPf.addEventListener('change', () => {
+        tipoAtual = 'pf';
+        exibirPlanos(tipoAtual);
+      });
+
+      radioPj.addEventListener('change', () => {
+        tipoAtual = 'pj';
+        exibirPlanos(tipoAtual);
+      });
+    }
+
+    configurarSeletor();
+  </script>
+</body>
+</html>
