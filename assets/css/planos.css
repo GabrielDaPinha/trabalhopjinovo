@@ -1,3 +1,9 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Nunito", sans-serif;
+}
 :root {
   --bg: #13293b;
   --bg-nav: #0f172a;
@@ -272,7 +278,7 @@ footer::before {
 .stats-custom .col-md-3:hover i {
   filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
 }
-
+/* NÃO SEI O QUE ERA ISSO MAS TAVA BUGANDO A NAV BAR
 @media (max-width: 991.98px) {
   .navbar-nav {
     gap: 0.5rem;
@@ -284,4 +290,14 @@ footer::before {
     margin-top: 0.75rem;
   }
 }
+*/
+.text-primary-emphasis {
+  color: #457CFF !important;
+}
 
+.neon-vazado {
+    color: transparent !important;
+    -webkit-text-stroke: 1.5px #00d2ff;
+    filter: drop-shadow(0 0 5px #00d2ff);
+    transition: all 0.3s ease;
+}

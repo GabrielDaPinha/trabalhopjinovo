@@ -26,22 +26,31 @@ $neon-color: #00d2ff;
     font-family: $fontPrincipal;
 }
 
-header {
-    background-color: $corFundo ;
-}
+
 
 .navbar {
+    background-color: rgba(168, 194, 255, 0.048);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid $corBtn;
+
     .navbar-brand {
-        width: 150px;
+        width: 165px;
+        height: auto;
+
+        img{
+        width: 100%;
         height: auto;
     }
-
+    }
+    
 
     .nav-item {
         .nav-link {
             color: $corTitulo;
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600;
 
             &:hover {
                 color: $corSubtitulo;
@@ -52,10 +61,10 @@ header {
     .btn-comecar {
         background-color: #fff;
         padding: 8px 16px;
-        border-radius: 15px;
+        border-radius: 30px;
         color: $corSubtitulo;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
 
         &:hover {
             background-color: $corSubtitulo;
@@ -64,8 +73,88 @@ header {
     }
 }
 
+@media (max-width: 991px) {
+  img{
+    width: 100px;
+    height: auto;
+  }
+   
+
+    .navbar-collapse {
+
+        margin-top: 15px;
+
+        padding: 20px;
+
+        border-radius: 20px;
+
+        background: rgba(15, 23, 42, 0.92);
+
+        backdrop-filter: blur(18px);
+
+        border: 1px solid rgba(0, 210, 255, 0.15);
+
+        box-shadow:
+            0 10px 40px rgba(0, 0, 0, 0.35);
+
+    }
+ 
+
+    .navbar-nav .nav-link {
+
+        border-radius: 12px;
+
+        transition: all .3s ease;
+
+        padding: 6px;
+
+    }
+
+    .navbar-nav .nav-link:hover {
+
+        background: rgba(69, 124, 255, .15);
+
+        color: #457CFF !important;
+
+    }
+
+     .navbar .btn {
+
+        width: 100%;
+
+        margin-top: 15px;
+
+        border-radius: 14px;
+
+        padding: 12px;
+
+    }
+
+    .navbar-toggler {
+
+    border: 1px solid rgba(0,210,255,.25);
+
+    border-radius: 12px;
+
+    padding: 8px 12px;
+
+    transition: .3s;
+
+}
+
+.navbar-toggler:hover {
+
+    box-shadow:
+        0 0 15px rgba(0,210,255,.25);
+
+}
+
+}
+
 .hero-section {
-    background-image: 
+    overflow: hidden;
+    position: relative;
+    background-image:
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
         url('../images/FundoHero.png');
     background-size: cover;
@@ -82,6 +171,9 @@ header {
         font-size: 40px;
         font-weight: 700;
         color: $corTitulo;
+        text-shadow: 0 0 20px rgba(0, 210, 255, .20);
+        animation:
+            fadeUp 1s ease;
 
         // Cores diferentes para as palavras "estratégia" e "clareza"
         .text-highlight {
@@ -90,6 +182,8 @@ header {
     }
 
     .hero-subtitle {
+        animation:
+            fadeUp 1.2s ease;
         font-size: 20px;
         color: $corTitulo;
         opacity: 0.8;
@@ -99,13 +193,16 @@ header {
 
     .btn-iniciar,
     .btn-demo {
+        animation:
+            fadeUp 1.4s ease;
         padding: 10px 0px;
-        min-width: 130px;
+        min-width: 160px;
         border-radius: 20px;
         color: $corTitulo;
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 600;
         transition: all 0.3s ease;
+        letter-spacing: 0.25px;
     }
 
     .btn-iniciar {
@@ -131,13 +228,262 @@ header {
     }
 }
 
-.hero-section {
-    position: relative;
+.hero-section::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(90deg,
+            rgba(15, 23, 42, .90) 0%,
+            rgba(15, 23, 42, .55) 45%,
+            rgba(15, 23, 42, .25) 100%);
+
     z-index: 0;
+
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    animation:
+        fadeUp .8s ease;
+    display: inline-block;
+
+    padding: 10px 18px;
+
+    border: $corBtn 1px solid;
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .05);
+
+    margin-bottom: 25px;
+
+    color: $corTitulo;
+
+    font-size: 16px;
+
+    backdrop-filter: blur(10px);
+
+}
+
+.hero-dragons {
+    position: relative;
+    width: 600px;
+    height: 500px;
+}
+
+.dragon-mentor {
+    animation: floatMentor 4s ease-in-out infinite;
+
+    position: absolute;
+
+    left: -200px;
+
+    top: 0;
+
+    width: 500px;
+
+    z-index: 2;
+
+
+   transition:
+        transform .4s ease,
+        filter .4s ease;
+
+    cursor:pointer;
+
+    &:hover{
+
+        transform: scale(1.03);
+
+        filter:
+            drop-shadow(0 0 8px rgba(0,210,255,.35))
+            drop-shadow(0 0 18px rgba(0,210,255,.20));
+
+    }
+}
+
+.dragon-apprentice {
+    animation: floatApprentice 3s ease-in-out infinite;
+
+    position: absolute;
+
+    left: 200px;
+
+    top: 250px;
+
+    width: 380px;
+
+    z-index: 3;
+
+    transition:
+        transform .4s ease,
+        filter .4s ease;
+
+    cursor:pointer;
+
+    &:hover{
+
+        transform: scale(1.05);
+
+        filter:
+            drop-shadow(0 0 6px rgba(0,210,255,.30))
+            drop-shadow(0 0 14px rgba(0,210,255,.18));
+
+    }
+}
+
+.particles-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.particles-bg span {
+
+    position: absolute;
+
+    bottom: -50px;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #00d2ff;
+
+    box-shadow:
+        0 0 10px #00d2ff,
+        0 0 20px #00d2ff;
+
+    opacity: .4;
+
+    animation:
+        rise 12s linear infinite;
+}
+
+
+.particles-bg span:nth-child(1) {
+    left: 5%;
+    animation-duration: 10s;
+}
+
+.particles-bg span:nth-child(2) {
+    left: 15%;
+    animation-duration: 14s;
+}
+
+.particles-bg span:nth-child(3) {
+    left: 30%;
+    animation-duration: 12s;
+}
+
+.particles-bg span:nth-child(4) {
+    left: 45%;
+    animation-duration: 16s;
+}
+
+.particles-bg span:nth-child(5) {
+    left: 60%;
+    animation-duration: 11s;
+}
+
+.particles-bg span:nth-child(6) {
+    left: 75%;
+    animation-duration: 15s;
+}
+
+.particles-bg span:nth-child(7) {
+    left: 85%;
+    animation-duration: 13s;
+}
+
+.particles-bg span:nth-child(8) {
+    left: 95%;
+    animation-duration: 17s;
+}
+
+.dragon-frame {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    transition: .4s;
+
+}
+
+.dragon-frame:hover {
+
+   .dragon-frame::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-20px;
+
+    border-radius:50%;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(0,210,255,.12) 0%,
+        rgba(0,210,255,.05) 45%,
+        transparent 75%
+      );
+
+    opacity:0;
+
+    transform:scale(.9);
+
+    transition:.4s;
+
+    z-index:-1;
+
+}
+}
+.scroll-arrow {
+    position: absolute;
+
+    bottom: 150px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    font-size: 32px;
+
+    text-decoration: none;
+
+    z-index: 5;
+
+    animation:
+        float 2s infinite;
+}
+
+.scroll-arrow:hover {
+
+    color: #00d2ff;
+
+    text-shadow:
+        0 0 20px #00d2ff;
 }
 
 .Cards-hero {
-    margin-top: -30px;
+    margin-top: -80px;
     padding: 0 0 40px;
     position: relative;
     z-index: 1;
@@ -199,9 +545,6 @@ header {
     font-size: 14px;
 }
 
-/* =========================================================
-   SEÇÃO TRILHAS
-========================================================= */
 
 /* =========================================================
    SEÇÃO TRILHAS
@@ -491,8 +834,15 @@ header {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .text-gray {
@@ -504,7 +854,7 @@ header {
     position: relative;
     z-index: 10;
     padding: 80px 0;
-    }
+}
 
 .feature-card {
     background-color: $bg-card;
@@ -544,6 +894,7 @@ body {
     padding: 0;
     background-color: $corFundo;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
 main {
@@ -556,11 +907,9 @@ main {
 ========================================================= */
 
 footer {
-    background: linear-gradient(
-        180deg,
-        rgba(8, 15, 35, 1) 0%,
-        rgba(5, 10, 25, 1) 100%
-    );
+    background: linear-gradient(180deg,
+            rgba(8, 15, 35, 1) 0%,
+            rgba(5, 10, 25, 1) 100%);
 
     border-top: 1px solid rgba(69, 124, 255, 0.25);
 
@@ -577,12 +926,10 @@ footer {
         width: 100%;
         height: 1px;
 
-        background: linear-gradient(
-            90deg,
-            transparent,
-            $corSubtitulo,
-            transparent
-        );
+        background: linear-gradient(90deg,
+                transparent,
+                $corSubtitulo,
+                transparent);
     }
 }
 
@@ -662,31 +1009,6 @@ footer {
     color: $accent-blue !important;
 }
 
-@media (min-width: 992px) {
-    .nav-item.dropdown .dropdown-menu {
-        display: block !important;
-        visibility: hidden;
-        opacity: 0;
-        left: 50%;
-        transform: translateX(-50%) translateY(15px);
-        transition: all 0.3s ease-in-out;
-        pointer-events: none;
-    }
-
-    .nav-item.dropdown .dropdown-menu.show {
-        visibility: visible;
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-        pointer-events: auto;
-    }
-}
-
-@media (max-width: 991px) {
-    .dropdown-menu {
-        min-width: 100% !important;
-    }
-}
-
 .neon-vazado {
     color: transparent !important;
     -webkit-text-stroke: 1.5px $neon-color;
@@ -700,7 +1022,6 @@ footer {
 }
 
 .brand-text {
-    font-family: 'Montserrat', sans-serif;
     font-weight: 800;
     letter-spacing: 2px;
     font-size: 1.25rem;
@@ -709,39 +1030,9 @@ footer {
     text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
 }
 
-.navbar-nav .nav-link {
-    color: #ffffff !important;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
-}
 
-.navbar-nav .nav-link:hover {
-    color: #ffffff !important;
-    text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
-}
 
-.navbar-nav .nav-link.active {
-    color: #ffffff !important;
-    text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
-}
 
-.hero-fixed h1 .text-primary-emphasis {
-    color: $neon-color !important;
-    text-shadow: 0 0 3px rgba(0, 210, 255, 0.4),
-        0 0 6px rgba(0, 210, 255, 0.2);
-    font-weight: 800;
-    display: inline-block;
-}
-
-.neon-sobre-wevers {
-    color: $neon-color !important;
-    text-shadow: 0 0 3px rgba(0, 210, 255, 0.4),
-        0 0 6px rgba(0, 210, 255, 0.2);
-    font-weight: 800;
-    display: inline-block;
-}
 
 /* =========================================================
    RESPONSIVO
@@ -749,7 +1040,28 @@ footer {
 
 @media (max-width: 900px) {
 
+    .hero-section {
+        .hero-dragons {
+            display: none;
+        }
+
+        .scroll-arrow{
+            display: none;
+        }
+
+        margin-bottom: 50px;
+    }
+    .floating-img {
+    animation: float 3s ease-in-out infinite;
+    width: 200px;
+
+}
+
     .secao-trilhas {
+        .titulo-jornada{
+            font-size: 32px;
+            margin:0;
+        }
 
         .card-trilha,
         .card-trilha.direita {
@@ -772,4 +1084,86 @@ footer {
             }
         }
     }
+}
+
+@keyframes floatMentor {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes floatApprentice {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes rise {
+
+    from {
+        transform:
+            translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .4;
+    }
+
+    100% {
+        transform:
+            translateY(-100vh);
+        opacity: 0;
+    }
+
+}
+
+@keyframes fadeUp {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(40px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+.scroll-arrow:hover {
+
+    color: #00d2ff;
+
+    text-shadow:
+        0 0 20px #00d2ff;
 }

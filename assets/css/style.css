@@ -5,18 +5,23 @@
   font-family: "Nunito", sans-serif;
 }
 
-header {
-  background-color: #0F172A;
+.navbar {
+  background-color: rgba(168, 194, 255, 0.048);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid #2B5293;
 }
-
 .navbar .navbar-brand {
-  width: 150px;
+  width: 165px;
+  height: auto;
+}
+.navbar .navbar-brand img {
+  width: 100%;
   height: auto;
 }
 .navbar .nav-item .nav-link {
   color: #E8F1F2;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .navbar .nav-item .nav-link:hover {
   color: #457CFF;
@@ -24,17 +29,58 @@ header {
 .navbar .btn-comecar {
   background-color: #fff;
   padding: 8px 16px;
-  border-radius: 15px;
+  border-radius: 30px;
   color: #457CFF;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .navbar .btn-comecar:hover {
   background-color: #457CFF;
   color: #fff;
 }
 
+@media (max-width: 991px) {
+  img {
+    width: 100px;
+    height: auto;
+  }
+  .navbar-collapse {
+    margin-top: 15px;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(0, 210, 255, 0.15);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  }
+  .navbar-nav .nav-link {
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    padding: 6px;
+  }
+  .navbar-nav .nav-link:hover {
+    background: rgba(69, 124, 255, 0.15);
+    color: #457CFF !important;
+  }
+  .navbar .btn {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 14px;
+    padding: 12px;
+  }
+  .navbar-toggler {
+    border: 1px solid rgba(0, 210, 255, 0.25);
+    border-radius: 12px;
+    padding: 8px 12px;
+    transition: 0.3s;
+  }
+  .navbar-toggler:hover {
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
+  }
+}
 .hero-section {
+  overflow: hidden;
+  position: relative;
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/FundoHero.png");
   background-size: cover;
   background-position: center;
@@ -50,11 +96,14 @@ header {
   font-size: 40px;
   font-weight: 700;
   color: #E8F1F2;
+  text-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+  animation: fadeUp 1s ease;
 }
 .hero-section .hero-title .text-highlight {
   color: #457CFF;
 }
 .hero-section .hero-subtitle {
+  animation: fadeUp 1.2s ease;
   font-size: 20px;
   color: #E8F1F2;
   opacity: 0.8;
@@ -63,13 +112,15 @@ header {
 }
 .hero-section .btn-iniciar,
 .hero-section .btn-demo {
+  animation: fadeUp 1.4s ease;
   padding: 10px 0px;
-  min-width: 130px;
+  min-width: 160px;
   border-radius: 20px;
   color: #E8F1F2;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.3s ease;
+  letter-spacing: 0.25px;
 }
 .hero-section .btn-iniciar {
   background-color: #2B5293;
@@ -90,13 +141,165 @@ header {
   transform: translateY(-2px);
 }
 
-.hero-section {
-  position: relative;
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.55) 45%, rgba(15, 23, 42, 0.25) 100%);
   z-index: 0;
 }
 
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-badge {
+  animation: fadeUp 0.8s ease;
+  display: inline-block;
+  padding: 10px 18px;
+  border: #2B5293 1px solid;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  margin-bottom: 25px;
+  color: #E8F1F2;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.hero-dragons {
+  position: relative;
+  width: 600px;
+  height: 500px;
+}
+
+.dragon-mentor {
+  animation: floatMentor 4s ease-in-out infinite;
+  position: absolute;
+  left: -200px;
+  top: 0;
+  width: 500px;
+  z-index: 2;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  cursor: pointer;
+}
+.dragon-mentor:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.35)) drop-shadow(0 0 18px rgba(0, 210, 255, 0.2));
+}
+
+.dragon-apprentice {
+  animation: floatApprentice 3s ease-in-out infinite;
+  position: absolute;
+  left: 200px;
+  top: 250px;
+  width: 380px;
+  z-index: 3;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  cursor: pointer;
+}
+.dragon-apprentice:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 6px rgba(0, 210, 255, 0.3)) drop-shadow(0 0 14px rgba(0, 210, 255, 0.18));
+}
+
+.particles-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particles-bg span {
+  position: absolute;
+  bottom: -50px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d2ff;
+  box-shadow: 0 0 10px #00d2ff, 0 0 20px #00d2ff;
+  opacity: 0.4;
+  animation: rise 12s linear infinite;
+}
+
+.particles-bg span:nth-child(1) {
+  left: 5%;
+  animation-duration: 10s;
+}
+
+.particles-bg span:nth-child(2) {
+  left: 15%;
+  animation-duration: 14s;
+}
+
+.particles-bg span:nth-child(3) {
+  left: 30%;
+  animation-duration: 12s;
+}
+
+.particles-bg span:nth-child(4) {
+  left: 45%;
+  animation-duration: 16s;
+}
+
+.particles-bg span:nth-child(5) {
+  left: 60%;
+  animation-duration: 11s;
+}
+
+.particles-bg span:nth-child(6) {
+  left: 75%;
+  animation-duration: 15s;
+}
+
+.particles-bg span:nth-child(7) {
+  left: 85%;
+  animation-duration: 13s;
+}
+
+.particles-bg span:nth-child(8) {
+  left: 95%;
+  animation-duration: 17s;
+}
+
+.dragon-frame {
+  position: absolute;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+.dragon-frame:hover .dragon-frame::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.12) 0%, rgba(0, 210, 255, 0.05) 45%, transparent 75%);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.4s;
+  z-index: -1;
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 32px;
+  text-decoration: none;
+  z-index: 5;
+  animation: float 2s infinite;
+}
+
+.scroll-arrow:hover {
+  color: #00d2ff;
+  text-shadow: 0 0 20px #00d2ff;
+}
+
 .Cards-hero {
-  margin-top: -30px;
+  margin-top: -80px;
   padding: 0 0 40px;
   position: relative;
   z-index: 1;
@@ -161,9 +364,6 @@ header {
 /* =========================================================
    SEÇÃO TRILHAS
 ========================================================= */
-/* =========================================================
-   SEÇÃO TRILHAS
-========================================================= */
 .secao-trilhas {
   width: 100%;
   padding: 80px 8%;
@@ -198,11 +398,11 @@ header {
   flex-direction: column;
   gap: 40px;
 }
-
+.secao-trilhas {
   /* =========================================================
      CARD
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha {
   width: 100%;
   min-height: 280px;
@@ -223,19 +423,19 @@ header {
   border-color: rgba(69, 124, 255, 0.7);
   box-shadow: 0 0 40px rgba(27, 136, 255, 0.2), inset 0 0 30px rgba(27, 136, 255, 0.06);
 }
-
+.secao-trilhas .card-trilha {
   /* =========================================================
      CARD INVERTIDO
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha.direita {
   flex-direction: row-reverse;
 }
-
+.secao-trilhas .card-trilha {
   /* =========================================================
      ÁREA DO DRAGÃO
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha .area-dragao {
   width: 260px;
   display: flex;
@@ -250,11 +450,11 @@ header {
      object-fit: contain;
   filter: drop-shadow(0 0 20px rgba(27, 136, 255, 0.45));
 }
-
+.secao-trilhas .card-trilha {
   /* =========================================================
      CONTEÚDO
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha .conteudo-trilha {
   flex: 1;
 }
@@ -281,11 +481,11 @@ header {
   margin-bottom: 30px;
   max-width: 600px;
 }
-
+.secao-trilhas .card-trilha {
   /* =========================================================
      PROGRESSO
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha .titulo-progresso {
   display: flex;
   justify-content: space-between;
@@ -308,11 +508,11 @@ header {
   background: linear-gradient(90deg, #1B39AD, #1B88E0);
   box-shadow: 0 0 15px rgba(27, 136, 255, 0.6);
 }
-
+.secao-trilhas .card-trilha {
   /* =========================================================
      BOTÃO
   ========================================================= */
-
+}
 .secao-trilhas .card-trilha button {
   padding: 14px 28px;
   border-radius: 999px;
@@ -437,6 +637,7 @@ body {
   padding: 0;
   background-color: #0F172A;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 main {
@@ -447,8 +648,6 @@ main {
 /* =========================================================
    FOOTER
 ========================================================= */
-
-
 footer {
   background: linear-gradient(180deg, rgb(8, 15, 35) 0%, rgb(5, 10, 25) 100%);
   border-top: 1px solid rgba(69, 124, 255, 0.25);
@@ -503,6 +702,9 @@ footer::before {
   font-size: 3.5rem;
 }
 
+/* =========================================================
+   HOVER SUAVE
+========================================================= */
 .stats-custom .col-6:hover,
 .stats-custom .col-md-3:hover {
   transform: translateY(-4px);
@@ -513,7 +715,6 @@ footer::before {
 .stats-custom .col-md-3:hover i {
   filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.6));
 }
-
 
 .stat-item h3 {
   font-size: 3rem;
@@ -531,28 +732,6 @@ footer::before {
   color: #457CFF !important;
 }
 
-@media (min-width: 992px) {
-  .nav-item.dropdown .dropdown-menu {
-    display: block !important;
-    visibility: hidden;
-    opacity: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(15px);
-    transition: all 0.3s ease-in-out;
-    pointer-events: none;
-  }
-  .nav-item.dropdown .dropdown-menu.show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-    pointer-events: auto;
-  }
-}
-@media (max-width: 991px) {
-  .dropdown-menu {
-    min-width: 100% !important;
-  }
-}
 .neon-vazado {
   color: transparent !important;
   -webkit-text-stroke: 1.5px #00d2ff;
@@ -566,7 +745,6 @@ footer::before {
 }
 
 .brand-text {
-  font-family: "Montserrat", sans-serif;
   font-weight: 800;
   letter-spacing: 2px;
   font-size: 1.25rem;
@@ -575,42 +753,27 @@ footer::before {
   text-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
 }
 
-.navbar-nav .nav-link {
-  color: #ffffff !important;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);
-}
-
-.navbar-nav .nav-link:hover {
-  color: #ffffff !important;
-  text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
-}
-
-.navbar-nav .nav-link.active {
-  color: #ffffff !important;
-  text-shadow: 0 0 12px rgba(0, 210, 255, 0.6);
-}
-
-.hero-fixed h1 .text-primary-emphasis {
-  color: #00d2ff !important;
-  text-shadow: 0 0 3px rgba(0, 210, 255, 0.4), 0 0 6px rgba(0, 210, 255, 0.2);
-  font-weight: 800;
-  display: inline-block;
-}
-
-.neon-sobre-wevers {
-  color: #00d2ff !important;
-  text-shadow: 0 0 3px rgba(0, 210, 255, 0.4), 0 0 6px rgba(0, 210, 255, 0.2);
-  font-weight: 800;
-  display: inline-block;
-}
-
 /* =========================================================
    RESPONSIVO
 ========================================================= */
 @media (max-width: 900px) {
+  .hero-section .hero-dragons {
+    display: none;
+  }
+  .hero-section .scroll-arrow {
+    display: none;
+  }
+  .hero-section {
+    margin-bottom: 50px;
+  }
+  .floating-img {
+    animation: float 3s ease-in-out infinite;
+    width: 200px;
+  }
+  .secao-trilhas .titulo-jornada {
+    font-size: 32px;
+    margin: 0;
+  }
   .secao-trilhas .card-trilha,
   .secao-trilhas .card-trilha.direita {
     flex-direction: column;
@@ -625,20 +788,64 @@ footer::before {
   .secao-trilhas .conteudo-trilha p {
     max-width: 100%;
   }
+}
+@keyframes floatMentor {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes floatApprentice {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.scroll-arrow:hover {
+  color: #00d2ff;
+  text-shadow: 0 0 20px #00d2ff;
 }/*# sourceMappingURL=style.css.map */
 
-.margem-nos {
-    padding: 1.5rem !important;
+
+
+/* NEON QUE TINHA ANTES
+.neon-sobre-wevers {
+  color: #00d2ff !important;
+  text-shadow: 0 0 3px rgba(0, 210, 255, 0.4), 0 0 6px rgba(0, 210, 255, 0.2);
+  font-weight: 800;
+  display: inline-block;
 }
-
-.navazulbg {
-    background-color: #0F172A !important;
-}
-
-.fontenav {
-    color: #ffffff !important;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-shadow: 0 0 8px rgba(0, 210, 255, 0.2);}
-
+*/
