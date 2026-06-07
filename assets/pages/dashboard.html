@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apiscale</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap-grid.min.css" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBg: '#0F172A',
+                        brandBlue: '#1B88E0',
+                        brandAccent: '#457CFF',
+                        textPrimary: '#E8F1F2',
+                        textSecondary: 'rgba(232, 241, 242, 0.7)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            color: #E8F1F2;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #1B88E0; border-radius: 10px; }
+
+        /* Estilo de Vidro Premium (Glassmorphism) */
+        .glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(69, 124, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(69, 124, 255, 0.35);
+            box-shadow: 0 0 25px rgba(27, 136, 224, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Efeitos Glow Neon */
+        .neon-text-glow { text-shadow: 0 0 12px rgba(27, 136, 224, 0.65); }
+        .neon-btn-glow { box-shadow: 0 0 15px rgba(65, 124, 255, 0.3); }
+        .neon-btn-glow:hover { box-shadow: 0 0 25px rgba(65, 124, 255, 0.6); }
+
+        /* SPA Architecture: Engine de Transição de Páginas */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+        .tab-content {
+            grid-column: 1;
+            grid-row: 1;
+            opacity: 0;
+            transform: translateX(45px) scale(0.98);
+            filter: blur(6px);
+            pointer-events: none;
+            visibility: hidden;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        filter 0.4s ease, 
+                        visibility 0.4s;
+        }
+        .tab-content.active-tab {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+            filter: blur(0);
+            pointer-events: auto;
+            visibility: visible;
+            z-index: 10;
+        }
+        .tab-content.exit-left {
+            opacity: 0;
+            transform: translateX(-45px) scale(0.98);
+            filter: blur(6px);
+            z-index: 0;
+        }
+
+        /* Micro-animações adicionais */
+        .pulse-soft { animation: pulseS 2s infinite ease-in-out; }
+        @keyframes pulseS {
+            0%, 100% { transform: scale(1); opacity: 0.9; }
+            50% { transform: scale(1.03); opacity: 1; box-shadow: 0 0 30px rgba(27, 136, 224, 0.4); }
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+
+    <aside id="sidebar" class="w-64 bg-[#0B111E] border-r border-slate-800 flex flex-col justify-between hidden lg:flex fixed h-full z-50 transition-all duration-300">
+        <div>
+            <div class="p-6 flex items-center gap-3 border-b border-slate-800/60">
+                <div class="w-9 h-9 bg-gradient-to-tr from-[#1B88E0] to-[#457CFF] rounded-xl flex items-center justify-center shadow-[0_0_15px_rgba(27,136,224,0.5)]">
+                    <i class="fa-solid fa-chart-line text-white text-lg"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-xl tracking-wider text-white">Api<span class="text-[#1B88E0]">scale</span></span>
+                    <p class="text-[9px] font-semibold tracking-widest uppercase text-slate-400">Gamified Platform</p>
+                </div>
+            </div>
+
+            <nav class="p-4 space-y-1.5 mt-4">
+                <button data-page="dashboard" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-white font-medium bg-slate-800/50 border-l-4 border-[#1B88E0] transition-all text-left">
+                    <i class="fa-solid fa-cube text-[#1B88E0] w-5"></i> Dashboard
+                </button>
+                <button data-page="metas" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                    <i class="fa-solid fa-bullseye w-5"></i> Metas
+                </button>
+                <button data-page="jornadas" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                    <i class="fa-solid fa-map-signs w-5"></i> Jornadas
+                </button>
+                <button data-page="ranking" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                    <i class="fa-solid fa-trophy w-5"></i> Ranking
+                </button>
+                <button data-page="equipe" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                    <i class="fa-solid fa-users w-5"></i> Equipe
+                </button>
+                <button data-page="mascote" class="sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                    <i class="fa-solid fa-dragon w-5"></i> Mascote
+                </button>
+            </nav>
+        </div>
+
+        <div class="p-4 border-t border-slate-800/60 space-y-2">
+            <button data-page="configuracoes" class="sidebar-link w-full flex items-center gap-4 px-4 py-2.5 rounded-xl text-slate-400 font-medium hover:text-white hover:bg-slate-800/30 transition-all text-left">
+                <i class="fa-solid fa-gear w-5"></i> Configurações
+            </button>
+            <div class="flex items-center gap-3 p-2 mt-2 rounded-xl bg-slate-900/50 border border-slate-800">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-9 h-9 rounded-full object-cover ring-2 ring-[#1B88E0]">
+                <div class="overflow-hidden">
+                    <h4 class="text-sm font-semibold truncate text-white">Sarah Jenkins</h4>
+                    <p class="text-xs text-slate-400 truncate">Product Manager</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="lg:hidden fixed bottom-4 right-4 z-50">
+        <button onclick="toggleMobileMenu()" class="w-14 h-14 bg-[#1B88E0] rounded-full flex items-center justify-center text-white text-xl shadow-lg shadow-blue-500/30">
+            <i class="fa-solid fa-bars" id="mobile-menu-icon"></i>
+        </button>
+    </div>
+
+    <div class="flex-1 lg:ml-64 flex flex-col min-h-screen relative">
+        
+        <header class="h-20 border-b border-slate-800 bg-[#0F172A]/80 backdrop-blur-md px-4 lg:px-8 flex items-center justify-between sticky top-0 z-40">
+            <div class="relative w-64 md:w-80 hidden sm:block">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <i class="fa-solid fa-magnifying-glass text-slate-500 text-sm"></i>
+                </span>
+                <input type="text" placeholder="Buscar no ecossistema..." class="w-full bg-[#1E293B]/40 border border-slate-800 rounded-xl pl-10 pr-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#1B88E0] transition-colors">
+            </div>
+
+            <div class="flex items-center gap-3 lg:hidden">
+                <div class="w-8 h-8 bg-[#1B88E0] rounded-lg flex items-center justify-center">
+                    <i class="fa-solid fa-chart-line text-white text-sm"></i>
+                </div>
+                <span class="font-bold text-lg text-white">Apiscale</span>
+            </div>
+
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-[#1B88E0]/30 rounded-full px-4 py-1.5 flex items-center gap-2 shadow-[0_0_15px_rgba(27,136,224,0.15)]">
+                    <i class="fa-solid fa-bolt text-yellow-400 animate-pulse"></i>
+                    <span class="text-xs font-semibold text-white tracking-wide"><span id="global-xp-display" class="text-[#1B88E0] font-bold">14.250</span> XP</span>
+                </div>
+
+                <button class="relative w-10 h-10 rounded-xl bg-[#1E293B]/60 border border-slate-800 flex items-center justify-center hover:bg-[#1E293B] transition-colors">
+                    <i class="fa-regular fa-bell text-white"></i>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+
+                <div class="flex items-center gap-3 border-l border-slate-800 pl-4 md:pl-6">
+                    <div class="text-right hidden md:block">
+                        <span class="block text-sm font-semibold text-white">Sarah Jenkins</span>
+                        <span class="block text-[11px] text-[#1B88E0] font-medium tracking-wider uppercase">Nível 24 • Vanguard</span>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Avatar" class="w-10 h-10 rounded-xl object-cover ring-2 ring-[#457CFF]">
+                </div>
+            </div>
+        </header>
+
+        <main id="content-area" class="content-wrapper flex-1 p-4 lg:p-8 max-w-[1600px] w-full mx-auto relative">
+            
+            <div id="page-dashboard" class="tab-content active-tab space-y-6">
+                <section class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="glass-card p-4 rounded-[20px] flex flex-col justify-between">
+                        <div class="flex justify-between items-start"><span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Metas Concluídas</span><div class="w-7 h-7 bg-emerald-500/10 rounded-lg flex items-center justify-center border border-emerald-500/20"><i class="fa-solid fa-check text-emerald-400 text-xs"></i></div></div>
+                        <div class="mt-4"><h3 class="text-2xl font-bold text-white tracking-tight">12 <span class="text-sm text-slate-400 font-normal">/ 15</span></h3><p class="text-[11px] text-emerald-400 mt-1"><i class="fa-solid fa-arrow-trend-up mr-1"></i> +8% este mês</p></div>
+                    </div>
+                    <div class="glass-card p-4 rounded-[20px] flex flex-col justify-between">
+                        <div class="flex justify-between items-start"><span class="text-xs font-medium text-slate-400 uppercase tracking-wider">XP do Mês</span><div class="w-7 h-7 bg-[#1B88E0]/10 rounded-lg flex items-center justify-center border border-[#1B88E0]/20"><i class="fa-solid fa-crown text-[#1B88E0] text-xs"></i></div></div>
+                        <div class="mt-4"><h3 class="text-2xl font-bold text-white tracking-tight neon-text-glow">+2.450</h3><p class="text-[11px] text-slate-400 mt-1">Meta semanal batida!</p></div>
+                    </div>
+                    <div class="glass-card p-4 rounded-[20px] flex flex-col justify-between">
+                        <div class="flex justify-between items-start"><span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Streak Atual</span><div class="w-7 h-7 bg-orange-500/10 rounded-lg flex items-center justify-center border border-orange-500/20"><i class="fa-solid fa-fire text-orange-500 text-xs"></i></div></div>
+                        <div class="mt-4"><h3 class="text-2xl font-bold text-white tracking-tight">18 <span class="text-sm text-slate-400 font-normal">Dias</span></h3><p class="text-[11px] text-orange-400 mt-1">Recorde pessoal 🔥</p></div>
+                    </div>
+                    <div class="glass-card p-4 rounded-[20px] flex flex-col justify-between">
+                        <div class="flex justify-between items-start"><span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Ranking</span><div class="w-7 h-7 bg-purple-500/10 rounded-lg flex items-center justify-center border border-purple-500/20"><i class="fa-solid fa-ranking-star text-purple-400 text-xs"></i></div></div>
+                        <div class="mt-4"><h3 class="text-2xl font-bold text-white tracking-tight">#4 <span class="text-sm text-slate-400 font-normal">Lugar</span></h3><p class="text-[11px] text-purple-400 mt-1"><i class="fa-solid fa-angle-up mr-0.5"></i> Subiu 2 posições</p></div>
+                    </div>
+                    <div class="glass-card p-4 rounded-[20px] flex flex-col justify-between col-span-2 lg:col-span-1">
+                        <div class="flex justify-between items-start"><span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Performance Global</span><div class="w-7 h-7 bg-blue-500/10 rounded-lg flex items-center justify-center border border-blue-500/20"><i class="fa-solid fa-chart-pie text-[#457CFF] text-xs"></i></div></div>
+                        <div class="mt-4"><h3 class="text-2xl font-bold text-white tracking-tight">84.2%</h3><div class="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden"><div class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] h-full rounded-full" style="width: 84%"></div></div></div>
+                    </div>
+                </section>
+
+                <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-[24px] lg:col-span-2 flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h2 class="text-lg font-bold text-white">Evolução do Desempenho</h2>
+                                <p class="text-xs text-slate-400">Acompanhamento contínuo de produtividade</p>
+                            </div>
+                        </div>
+                        <div id="chart-dashboard-evolution" class="w-full"></div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-lg font-bold text-white mb-4">Jornadas Ativas</h2>
+                            <div class="space-y-4">
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs font-medium"><span>Liderança Exponencial</span><span class="text-[#1B88E0]">65%</span></div>
+                                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800"><div class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] h-full rounded-full" style="width: 65%"></div></div>
+                                </div>
+                                <div class="space-y-1">
+                                    <div class="flex justify-between text-xs font-medium"><span>Planejamento OKRs</span><span class="text-[#1B88E0]">78%</span></div>
+                                    <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800"><div class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] h-full rounded-full" style="width: 78%"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="navigateToPage('jornadas')" class="w-full mt-6 bg-[#1B88E0]/20 hover:bg-[#1B88E0] text-white border border-[#1B88E0]/40 text-xs py-2.5 rounded-xl font-semibold transition-all">Ver Todas as Jornadas</button>
+                    </div>
+                </section>
+
+                <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between text-center items-center">
+                        <div class="w-full flex justify-between text-left mb-2">
+                            <div><h3 class="text-base font-bold text-white">Seu Dragão</h3><p class="text-xs text-slate-400">Nível 4 • Jovem</p></div>
+                            <i class="fa-solid fa-dragon text-[#1B88E0] text-xl"></i>
+                        </div>
+                        <div class="w-24 h-24 bg-slate-950 rounded-full border border-blue-500/30 flex items-center justify-center my-3 pulse-soft">
+                            <i class="fa-solid fa-dragon text-4xl text-transparent bg-clip-text bg-gradient-to-tr from-[#1B88E0] to-cyan-400"></i>
+                        </div>
+                        <button onclick="feedMascot()" class="w-full bg-gradient-to-r from-[#1B88E0] to-[#457CFF] text-white text-xs py-2.5 rounded-xl font-bold shadow-md">Alimentar Mascote (+10 XP)</button>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between">
+                        <h3 class="text-base font-bold text-white mb-3">Líderes do Mês</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between bg-slate-900/50 p-2.5 border border-slate-800 rounded-xl">
+                                <span class="text-xs font-semibold text-white">🥇 Marcus Vance</span><span class="text-xs font-bold text-yellow-500">16.820 XP</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-slate-900/50 p-2.5 border border-slate-800 rounded-xl">
+                                <span class="text-xs font-semibold text-white">🥈 Helena Roze</span><span class="text-xs font-bold text-slate-300">15.440 XP</span>
+                            </div>
+                        </div>
+                        <button onclick="navigateToPage('ranking')" class="text-xs text-[#1B88E0] font-medium text-center pt-2">Exibir Ranking Geral →</button>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between">
+                        <h3 class="text-base font-bold text-white mb-3">Sprints Ativos</h3>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between text-xs border border-emerald-500/20 bg-emerald-500/5 p-2 rounded-xl">
+                                <span class="truncate text-white">Lançar API Gateway</span><span class="text-emerald-400 font-bold">Feito</span>
+                            </div>
+                            <div class="flex items-center justify-between text-xs border border-red-500/20 bg-red-500/5 p-2 rounded-xl">
+                                <span class="truncate text-white">Atualizar SLA</span><span class="text-red-400 font-bold">Atrasado</span>
+                            </div>
+                        </div>
+                        <button onclick="navigateToPage('metas')" class="w-full mt-3 bg-slate-900 text-slate-400 border border-slate-800 text-xs py-2 rounded-xl">Gerenciar Metas</button>
+                    </div>
+                </section>
+            </div>
+
+            <div id="page-metas" class="tab-content space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">Gestão Estratégica de Metas (OKRs)</h2>
+                        <p class="text-sm text-slate-400">Distribuição dinâmica de OKRs e métricas em formato Kanban Kanban.</p>
+                    </div>
+                    <button class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] text-white px-4 py-2.5 rounded-xl font-semibold text-sm neon-btn-glow transition-all">
+                        <i class="fa-solid fa-plus mr-2"></i> Criar Nova Meta
+                    </button>
+                </div>
+
+                <div class="flex gap-2 p-1 bg-slate-900/80 border border-slate-800 rounded-xl w-fit text-xs">
+                    <button class="px-4 py-2 rounded-lg bg-[#1B88E0] text-white font-medium">Todos os Sprints</button>
+                    <button class="px-4 py-2 rounded-lg text-slate-400 hover:text-white font-medium">Pendentes</button>
+                    <button class="px-4 py-2 rounded-lg text-slate-400 hover:text-white font-medium">Concluídas</button>
+                    <button class="px-4 py-2 rounded-lg text-slate-400 hover:text-white font-medium">Atrasadas</button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between px-2"><span class="text-xs font-bold text-slate-400 uppercase tracking-widest">A Fazer (02)</span><span class="w-2 h-2 rounded-full bg-slate-400"></span></div>
+                        <div class="glass-card p-5 rounded-2xl space-y-3">
+                            <div class="flex justify-between items-center"><span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 border border-blue-500/20">Alta</span><span class="text-xs font-bold text-yellow-400">+450 XP</span></div>
+                            <h4 class="text-sm font-bold text-white">Refatorar Middleware de Autenticação</h4>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-slate-700 h-full w-0"></div></div>
+                            <div class="flex justify-between items-center text-[11px] text-slate-400"><span><i class="fa-regular fa-calendar mr-1"></i> 14 Jun 2026</span><span class="font-medium">0%</span></div>
+                        </div>
+                        <div class="glass-card p-5 rounded-2xl space-y-3">
+                            <div class="flex justify-between items-center"><span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-slate-500/10 text-slate-400 border border-slate-800">Média</span><span class="text-xs font-bold text-yellow-400">+300 XP</span></div>
+                            <h4 class="text-sm font-bold text-white">Mapear Arquitetura SQL Server</h4>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-slate-700 h-full w-0"></div></div>
+                            <div class="flex justify-between items-center text-[11px] text-slate-400"><span><i class="fa-regular fa-calendar mr-1"></i> 28 Jun 2026</span><span class="font-medium">0%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between px-2"><span class="text-xs font-bold text-amber-400 uppercase tracking-widest">Em Execução (01)</span><span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span></div>
+                        <div class="glass-card p-5 rounded-2xl space-y-3 border border-amber-500/20">
+                            <div class="flex justify-between items-center"><span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">Crítica</span><span class="text-xs font-bold text-yellow-400">+800 XP</span></div>
+                            <h4 class="text-sm font-bold text-white">Otimização de Query e Latência de Rotas</h4>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800"><div class="bg-gradient-to-r from-amber-500 to-yellow-400 h-full" style="width: 65%"></div></div>
+                            <div class="flex justify-between items-center text-[11px] text-slate-400"><span><i class="fa-regular fa-calendar mr-1"></i> 02 Jun 2026</span><span class="font-medium text-amber-400 font-bold">65%</span></div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between px-2"><span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Revisão & Concluído (02)</span><span class="w-2 h-2 rounded-full bg-emerald-400"></span></div>
+                        <div class="glass-card p-5 rounded-2xl space-y-3 border border-emerald-500/20">
+                            <div class="flex justify-between items-center"><span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Média</span><span class="text-xs font-bold text-emerald-400"><i class="fa-solid fa-circle-check"></i> +500 XP</span></div>
+                            <h4 class="text-sm font-bold text-white">Homologação de Pipeline CI/CD em C#</h4>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full w-full"></div></div>
+                            <div class="flex justify-between items-center text-[11px] text-slate-400"><span><i class="fa-regular fa-calendar mr-1"></i> Concluído</span><span class="font-bold text-emerald-400">100%</span></div>
+                        </div>
+                        <div class="glass-card p-5 rounded-2xl space-y-3 border border-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
+                            <div class="flex justify-between items-center"><span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20">Crítica</span><span class="text-xs font-bold text-red-400">Penalidade XP</span></div>
+                            <h4 class="text-sm font-bold text-white">Revisão de SLAs dos Clientes Enterprise</h4>
+                            <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-red-500 h-full" style="width: 85%"></div></div>
+                            <div class="flex justify-between items-center text-[11px] text-red-400"><span><i class="fa-solid fa-triangle-exclamation mr-1"></i> Atrasado</span><span class="font-bold">85%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-jornadas" class="tab-content space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Árvore de Skills e Jornadas Profissionais</h2>
+                    <p class="text-sm text-slate-400">Evolua seu nível técnico cumprindo trilhas de conhecimento corporativo.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 bg-blue-500/10 border border-blue-500/30 rounded-xl flex items-center justify-center text-xl text-[#1B88E0] shadow-[0_0_15px_rgba(27,136,224,0.2)]">
+                                <i class="fa-solid fa-bezier-curve"></i>
+                            </div>
+                            <span class="text-xs font-bold px-2 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded-lg">NÍVEL 3</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Liderança Exponencial</h3>
+                            <p class="text-xs text-slate-400 mt-1">Desenvolva habilidades de gestão de pessoas e métricas ágeis baseadas em OKR.</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold"><span class="text-slate-400">Evolução Geral</span><span class="text-[#1B88E0]">65%</span></div>
+                            <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800/80"><div class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] h-full" style="width: 65%"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
+                            <div class="text-[11px] text-slate-400">Recompensa: <span class="text-amber-400 font-bold">Badge Mentor</span></div>
+                            <button class="bg-[#1B88E0]/20 hover:bg-[#1B88E0] text-white border border-[#1B88E0]/40 px-4 py-2 rounded-xl text-xs font-semibold transition-all">Continuar Jornada</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 bg-purple-500/10 border border-purple-500/30 rounded-xl flex items-center justify-center text-xl text-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                                <i class="fa-solid fa-code"></i>
+                            </div>
+                            <span class="text-xs font-bold px-2 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded-lg">NÍVEL 1</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Desenvolvimento Backend C#</h3>
+                            <p class="text-xs text-slate-400 mt-1">Domine arquiteturas limpas, pipelines assíncronos e integrações SQL nativas.</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold"><span class="text-slate-400">Evolução Geral</span><span class="text-purple-400">42%</span></div>
+                            <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800/80"><div class="bg-gradient-to-r from-purple-500 to-indigo-500 h-full" style="width: 42%"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
+                            <div class="text-[11px] text-slate-400">Recompensa: <span class="text-yellow-400 font-bold">+500 XP Global</span></div>
+                            <button class="bg-purple-500/20 hover:bg-purple-500 text-white border border-purple-500/40 px-4 py-2 rounded-xl text-xs font-semibold transition-all">Continuar Jornada</button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] flex flex-col justify-between space-y-4">
+                        <div class="flex justify-between items-start">
+                            <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/30 rounded-xl flex items-center justify-center text-xl text-amber-400 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
+                                <i class="fa-solid fa-chess-knight"></i>
+                            </div>
+                            <span class="text-xs font-bold px-2 py-1 bg-slate-900 border border-slate-800 text-slate-300 rounded-lg">NÍVEL 5</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Estratégia Corporativa</h3>
+                            <p class="text-xs text-slate-400 mt-1">Alinhamento tático de alto impacto, análise de churn e otimização SaaS.</p>
+                        </div>
+                        <div class="space-y-1.5">
+                            <div class="flex justify-between text-xs font-semibold"><span class="text-slate-400">Evolução Geral</span><span class="text-amber-400">78%</span></div>
+                            <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800/80"><div class="bg-gradient-to-r from-amber-500 to-orange-500 h-full" style="width: 78%"></div></div>
+                        </div>
+                        <div class="flex items-center justify-between pt-2 border-t border-slate-800/60">
+                            <div class="text-[11px] text-slate-400">Recompensa: <span class="text-cyan-400 font-bold">Skin Dragão Ancestral</span></div>
+                            <button class="bg-amber-500/20 hover:bg-amber-500 text-white border border-amber-500/40 px-4 py-2 rounded-xl text-xs font-semibold transition-all">Continuar Jornada</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-ranking" class="tab-content space-y-6">
+                <div class="text-center max-w-xl mx-auto space-y-2">
+                    <h2 class="text-2xl font-bold text-white">Painel de Competição Saudável</h2>
+                    <p class="text-sm text-slate-400">Suba de nível e lidere a tabela de classificação acumulando XP através de entregas de metas.</p>
+                </div>
+
+                <div class="flex justify-center">
+                    <div class="flex gap-2 p-1 bg-slate-900/90 border border-slate-800 rounded-xl text-xs">
+                        <button class="px-5 py-2.5 rounded-lg bg-[#1B88E0] text-white font-semibold">Geral</button>
+                        <button class="px-5 py-2.5 rounded-lg text-slate-400 hover:text-white font-semibold">Da Empresa</button>
+                        <button class="px-5 py-2.5 rounded-lg text-slate-400 hover:text-white font-semibold">Da Equipe</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 max-w-2xl mx-auto items-end gap-2 pt-6 pb-4">
+                    <div class="flex flex-col items-center">
+                        <div class="relative"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80" class="w-14 h-14 rounded-full object-cover ring-2 ring-slate-400"><span class="absolute -bottom-1 -right-1 text-lg">🥈</span></div>
+                        <span class="text-xs font-bold text-white mt-2 truncate max-w-full">Helena Roze</span>
+                        <div class="w-full bg-gradient-to-t from-slate-900 to-slate-800/80 border border-slate-700/50 h-24 rounded-t-xl mt-2 flex flex-col justify-center items-center"><span class="text-xs font-extrabold text-slate-300">15.440</span><span class="text-[9px] text-slate-400">XP</span></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="relative shadow-[0_0_25px_rgba(234,179,8,0.2)]"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80" class="w-18 h-18 rounded-full object-cover ring-4 ring-yellow-500"><span class="absolute -bottom-1 -right-1 text-xl">🥇</span></div>
+                        <span class="text-sm font-bold text-white mt-2 truncate max-w-full">Marcus Vance</span>
+                        <div class="w-full bg-gradient-to-t from-slate-900 to-[#1B88E0]/20 border border-yellow-500/30 h-32 rounded-t-xl mt-2 flex flex-col justify-center items-center shadow-[0_-5px_20px_rgba(27,136,224,0.15)]"><span class="text-sm font-extrabold text-yellow-400">16.820</span><span class="text-[10px] text-slate-300">XP</span></div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="relative"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80" class="w-14 h-14 rounded-full object-cover ring-2 ring-amber-600"><span class="absolute -bottom-1 -right-1 text-lg">🥉</span></div>
+                        <span class="text-xs font-bold text-white mt-2 truncate max-w-full">Arthur Pendragon</span>
+                        <div class="w-full bg-gradient-to-t from-slate-900 to-slate-800/80 border border-slate-700/50 h-20 rounded-t-xl mt-2 flex flex-col justify-center items-center"><span class="text-xs font-extrabold text-amber-600">14.910</span><span class="text-[9px] text-slate-400">XP</span></div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-2xl overflow-hidden max-w-3xl mx-auto">
+                    <div class="p-3 bg-slate-900/80 border-b border-slate-800 text-xs font-bold text-slate-400 grid grid-cols-12">
+                        <div class="col-span-2 text-center">POSIÇÃO</div>
+                        <div class="col-span-6">COLABORADOR</div>
+                        <div class="col-span-4 text-right pr-4">XP TOTAL</div>
+                    </div>
+                    <div class="divide-y divide-slate-800/60">
+                        <div class="p-3.5 grid grid-cols-12 items-center bg-[#1B88E0]/5 border-y border-[#1B88E0]/20">
+                            <div class="col-span-2 text-center font-extrabold text-[#1B88E0]">#4</div>
+                            <div class="col-span-6 flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=60&q=80" class="w-8 h-8 rounded-full object-cover">
+                                <span class="text-sm font-bold text-white">Sarah Jenkins <span class="text-[10px] text-[#1B88E0] ml-1 bg-blue-500/10 px-1.5 py-0.5 rounded font-normal">Você</span></span>
+                            </div>
+                            <div class="col-span-4 text-right pr-4 text-sm font-extrabold text-white">14.250 XP</div>
+                        </div>
+                        <div class="p-3.5 grid grid-cols-12 items-center hover:bg-slate-900/30 transition-colors">
+                            <div class="col-span-2 text-center text-slate-400 font-bold">#5</div>
+                            <div class="col-span-6 flex items-center gap-3">
+                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=60&q=80" class="w-8 h-8 rounded-full object-cover">
+                                <span class="text-sm font-medium text-slate-300">Clovis Rossi</span>
+                            </div>
+                            <div class="col-span-4 text-right pr-4 text-sm font-bold text-slate-300">13.900 XP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-equipe" class="tab-content space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Visão Executiva de Equipe</h2>
+                        <p class="text-sm text-slate-400">Métricas analíticas de desempenho de squads e liderados diretos.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-[24px]">
+                    <h3 class="text-base font-bold text-white mb-2">Produtividade Agrupada por Sprint</h3>
+                    <div id="chart-team-productivity" class="w-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-xl object-cover ring-2 ring-emerald-500">
+                        <div class="flex-1 space-y-2 overflow-hidden">
+                            <div>
+                                <h4 class="text-sm font-bold text-white truncate">Marcus Vance</h4>
+                                <p class="text-xs text-slate-400 truncate">DevOps Lead • Nível 28</p>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-[11px]">
+                                    <span class="text-slate-500">Métricas de Sprint</span><span class="text-emerald-400 font-bold">96%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-emerald-500 h-full" style="width: 96%"></div></div>
+                            </div>
+                            <div class="flex gap-3 text-[10px] text-slate-400 pt-1">
+                                <span>🔥 24 Dias</span><span>🎯 14 Metas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-xl object-cover ring-2 ring-blue-500">
+                        <div class="flex-1 space-y-2 overflow-hidden">
+                            <div>
+                                <h4 class="text-sm font-bold text-white truncate">Helena Roze</h4>
+                                <p class="text-xs text-slate-400 truncate">UI/UX Designer • Nível 22</p>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-[11px]">
+                                    <span class="text-slate-500">Métricas de Sprint</span><span class="text-blue-400 font-bold">88%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-blue-500 h-full" style="width: 88%"></div></div>
+                            </div>
+                            <div class="flex gap-3 text-[10px] text-slate-400 pt-1">
+                                <span>🔥 12 Dias</span><span>🎯 9 Metas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl flex items-start gap-4">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&q=80" class="w-12 h-12 rounded-xl object-cover ring-2 ring-amber-500">
+                        <div class="flex-1 space-y-2 overflow-hidden">
+                            <div>
+                                <h4 class="text-sm font-bold text-white truncate">Arthur Pendragon</h4>
+                                <p class="text-xs text-slate-400 truncate">Growth Analyst • Nível 19</p>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-[11px]">
+                                    <span class="text-slate-500">Métricas de Sprint</span><span class="text-amber-500 font-bold">71%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden"><div class="bg-amber-500 h-full" style="width: 71%"></div></div>
+                            </div>
+                            <div class="flex gap-3 text-[10px] text-slate-400 pt-1">
+                                <span>🔥 5 Dias</span><span>🎯 6 Metas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-mascote" class="tab-content space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Central do Mascote Gamificado</h2>
+                    <p class="text-sm text-slate-400">Seu desempenho profissional dita o crescimento e a força de seu avatar biológico virtual.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                    <div class="glass-card p-6 rounded-[24px] lg:col-span-2 flex flex-col items-center justify-center min-h-[400px] relative overflow-hidden">
+                        <div class="w-full flex justify-between items-center bg-slate-950/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-400 mb-6">
+                            <span class="text-slate-600 font-bold">Ovo</span> <i class="fa-solid fa-chevron-right text-slate-700"></i>
+                            <span class="text-slate-600 font-bold">Bebê</span> <i class="fa-solid fa-chevron-right text-slate-700"></i>
+                            <span class="text-[#1B88E0] font-extrabold neon-text-glow">Jovem Dragão Azul</span> <i class="fa-solid fa-chevron-right text-slate-700"></i>
+                            <span class="text-slate-600 font-bold">Adulto Ancestral</span>
+                        </div>
+
+                        <div class="w-44 h-44 bg-gradient-to-tr from-slate-950 to-slate-900 border border-blue-500/30 rounded-full flex items-center justify-center pulse-soft shadow-[0_0_40px_rgba(27,136,224,0.3)] my-6">
+                            <i id="dragon-icon" class="fa-solid fa-dragon text-7xl text-transparent bg-clip-text bg-gradient-to-tr from-[#1B88E0] to-cyan-400 transition-all duration-300"></i>
+                        </div>
+                        
+                        <div class="text-center space-y-1">
+                            <h3 class="text-xl font-bold text-white">Eclion <span class="text-xs font-bold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">NÍVEL 4</span></h3>
+                            <p class="text-xs text-slate-400">Estágio atual alcançado após a conclusão da trilha DevOps.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-[24px] space-y-5">
+                        <h3 class="text-base font-bold text-white border-b border-slate-800 pb-2">Status e Atributos</h3>
+                        
+                        <div class="space-y-3.5">
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-slate-400">Energia Sincronizada</span><span class="text-amber-500 font-bold" id="txt-energia">80%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800"><div id="bar-energia" class="bg-amber-500 h-full transition-all duration-500" style="width: 80%"></div></div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-slate-400">Índice de Fome</span><span class="text-emerald-400 font-bold" id="txt-fome">20%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800"><div id="bar-fome" class="bg-emerald-500 h-full transition-all duration-500" style="width: 20%"></div></div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs">
+                                    <span class="text-slate-400">Fator de Humor</span><span class="text-purple-400 font-bold">95%</span>
+                                </div>
+                                <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800"><div class="bg-purple-500 h-full" style="width: 95%"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-800 space-y-2">
+                            <button onclick="feedMascot()" class="w-full bg-gradient-to-r from-[#1B88E0] to-[#457CFF] text-white font-semibold text-sm py-2.5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-shrimp"></i> Alimentar Criatura (+10 XP)
+                            </button>
+                            <button onclick="triggerMascotTraining()" class="w-full bg-slate-900 border border-slate-800 text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-slate-800 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-dumbbell text-slate-400"></i> Treinar Atributos (+25 XP)
+                            </button>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button class="bg-slate-900/40 border border-slate-800 text-slate-400 text-xs py-2 rounded-xl font-medium">Equipar Itens</button>
+                                <button class="bg-slate-900/40 border border-slate-800 text-slate-400 text-xs py-2 rounded-xl font-medium">Personalizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="page-configuracoes" class="tab-content space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Parâmetros do Sistema e Conta</h2>
+                    <p class="text-sm text-slate-400">Ajuste suas preferências corporativas, segurança e notificações.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                    <div class="glass-card p-6 rounded-[24px] lg:col-span-2 space-y-4">
+                        <div class="flex items-center gap-4 border-b border-slate-800/80 pb-4">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80" class="w-16 h-16 rounded-2xl object-cover ring-2 ring-[#1B88E0]">
+                            <div>
+                                <button class="bg-slate-900 border border-slate-800 text-xs text-white px-3 py-1.5 rounded-lg font-semibold hover:bg-slate-800">Alterar Foto de Perfil</button>
+                                <p class="text-[10px] text-slate-500 mt-1">Formatos suportados: PNG, JPG. Máximo 2MB.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1">
+                                <label class="text-xs text-slate-400 font-semibold">Nome Completo</label>
+                                <input type="text" value="Sarah Jenkins" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#1B88E0]">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs text-slate-400 font-semibold">Endereço de E-mail</label>
+                                <input type="email" value="sarah.j@apiscale.io" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#1B88E0]">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs text-slate-400 font-semibold">Nova Senha</label>
+                                <input type="password" placeholder="••••••••••••" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#1B88E0]">
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-xs text-slate-400 font-semibold">Confirmar Senha</label>
+                                <input type="password" placeholder="••••••••••••" class="w-full bg-slate-950/60 border border-slate-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-[#1B88E0]">
+                            </div>
+                        </div>
+                        <div class="pt-2">
+                            <button class="bg-gradient-to-r from-[#1B88E0] to-[#457CFF] text-white text-xs px-4 py-2.5 rounded-xl font-bold">Salvar Alterações</button>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="glass-card p-6 rounded-[24px] space-y-4">
+                            <h3 class="text-sm font-bold text-white border-b border-slate-800 pb-2">Preferências</h3>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-xs font-semibold text-white block">Alertas por E-mail</span><span class="text-[10px] text-slate-500">Notificações semanais de OKRs</span></div>
+                                <input type="checkbox" checked class="w-4 h-4 accent-[#1B88E0]">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-xs font-semibold text-white block">Autenticação MFA</span><span class="text-[10px] text-slate-500">Camada extra de segurança</span></div>
+                                <input type="checkbox" checked class="w-4 h-4 accent-[#1B88E0]">
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <div><span class="text-xs font-semibold text-white block">Modo de Exibição</span><span class="text-[10px] text-slate-400">Dark Mode (Premium)</span></div>
+                                <span class="text-[10px] font-bold text-[#1B88E0] bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Ativo</span>
+                            </div>
+                        </div>
+
+                        <div class="glass-card p-4 rounded-[20px] border border-red-500/20 bg-red-500/5">
+                            <h4 class="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">Zona de Segurança</h4>
+                            <p class="text-[11px] text-slate-400 mb-3">Sessões ativas em outros computadores corporativos.</p>
+                            <button class="w-full bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 font-bold text-xs py-2 rounded-xl transition-all">Efetuar Logout de Todas as Sessões</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        // Memória de Estado Global reativa simples (Preparada para futura persistência C# / SQL Server)
+        let appState = {
+            userXp: 14250,
+            dragonEnergy: 80,
+            dragonHunger: 20
+        };
+
+        // Instâncias Globais de Gráficos para redimensionamento resiliente em SPA
+        let chartInstances = {};
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Inicializa a escuta de eventos nos botões com atributos customizados 'data-page'
+            initSpaNavigation();
+            
+            // Inicializa gráficos da tela padrão (Dashboard)
+            initDashboardChart();
+        });
+
+        // SPA Navigation Core Setup
+        function initSpaNavigation() {
+            const navButtons = document.querySelectorAll('[data-page]');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const targetPage = this.getAttribute('data-page');
+                    navigateToPage(targetPage);
+                    
+                    // Fecha menu mobile automaticamente se estiver aberto
+                    const sidebar = document.getElementById('sidebar');
+                    if (!sidebar.classList.contains('hidden')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+        }
+
+        function navigateToPage(pageId) {
+            const currentActiveTab = document.querySelector('.tab-content.active-tab');
+            const targetTab = document.getElementById(`page-${pageId}`);
+            
+            if (!targetTab || currentActiveTab === targetTab) return;
+
+            // Orchestrates Outbound Animation
+            if (currentActiveTab) {
+                currentActiveTab.classList.add('exit-left');
+                currentActiveTab.classList.remove('active-tab');
+                
+                // Limpa classes após a transição terminar
+                setTimeout(() => {
+                    currentActiveTab.classList.remove('exit-left');
+                }, 400);
+            }
+
+            // Orchestrates Inbound Animation
+            targetTab.classList.add('active-tab');
+
+            // Atualiza visual de links ativos na Sidebar
+            updateSidebarActiveState(pageId);
+
+            // Lazy loading e redimensionamento sob demanda de gráficos injetados por rota SPA
+            handleChartLoadingOnRoute(pageId);
+        }
+
+        function updateSidebarActiveState(pageId) {
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+            sidebarLinks.forEach(link => {
+                const linkPage = link.getAttribute('data-page');
+                if (linkPage === pageId) {
+                    link.className = "sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-white font-medium bg-slate-800/50 border-l-4 border-[#1B88E0] transition-all text-left";
+                    const icon = link.querySelector('i');
+                    if (icon) icon.className = icon.className.replace('text-slate-400', 'text-[#1B88E0]');
+                } else {
+                    link.className = "sidebar-link w-full flex items-center gap-4 px-4 py-3 rounded-xl text-slate-400 font-medium border-l-4 border-transparent hover:text-white hover:bg-slate-800/30 transition-all text-left";
+                }
+            });
+        }
+
+        function handleChartLoadingOnRoute(pageId) {
+            setTimeout(() => {
+                if (pageId === 'dashboard') {
+                    if (chartInstances['dashboard']) {
+                        chartInstances['dashboard'].windowResize();
+                    } else {
+                        initDashboardChart();
+                    }
+                } else if (pageId === 'equipe') {
+                    if (chartInstances['team']) {
+                        chartInstances['team'].windowResize();
+                    } else {
+                        initTeamChart();
+                    }
+                }
+            }, 50);
+        }
+
+        // CONTROLADORES DE RENDERIZAÇÃO DE GRÁFICOS (APEXCHARTS)
+        function initDashboardChart() {
+            const options = {
+                series: [
+                    { name: 'XP Obtido', type: 'area', data: [440, 505, 414, 671, 227, 413, 201, 352, 752] },
+                    { name: 'Metas Entregues', type: 'line', data: [2, 3, 1, 4, 2, 3, 2, 2, 5] }
+                ],
+                chart: { height: 260, type: 'line', toolbar: { show: false }, background: 'transparent' },
+                stroke: { width: [3, 4], curve: 'smooth' },
+                fill: { type: 'gradient', gradient: { opacityFrom: 0.35, opacityTo: 0.05 } },
+                colors: ['#1B88E0', '#10B981'],
+                labels: ['Sprint 12', 'Sprint 13', 'Sprint 14', 'Sprint 15', 'Sprint 16', 'Sprint 17', 'Sprint 18', 'Sprint 19', 'Sprint 20'],
+                grid: { borderColor: 'rgba(69, 124, 255, 0.08)' },
+                legend: { show: true, labels: { colors: '#E8F1F2' } },
+                theme: { mode: 'dark' },
+                xaxis: { axisBorder: { show: false }, labels: { style: { colors: 'rgba(232, 241, 242, 0.6)' } } },
+                yaxis: { labels: { style: { colors: 'rgba(232, 241, 242, 0.6)' } } },
+                tooltip: { theme: 'dark' }
+            };
+
+            const targetEl = document.querySelector("#chart-dashboard-evolution");
+            if (targetEl) {
+                chartInstances['dashboard'] = new ApexCharts(targetEl, options);
+                chartInstances['dashboard'].render();
+            }
+        }
+
+        function initTeamChart() {
+            const options = {
+                series: [{
+                    name: 'Entregas Concluídas',
+                    data: [44, 55, 41, 67, 22, 43, 21, 49, 32, 54, 63, 71]
+                }],
+                chart: { type: 'bar', height: 260, toolbar: { show: false }, background: 'transparent' },
+                plotOptions: { bar: { borderRadius: 6, horizontal: false, columnWidth: '45%' } },
+                colors: ['#457CFF'],
+                theme: { mode: 'dark' },
+                grid: { borderColor: 'rgba(69, 124, 255, 0.08)' },
+                xaxis: {
+                    categories: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    labels: { style: { colors: 'rgba(232, 241, 242, 0.6)' } }
+                },
+                yaxis: { labels: { style: { colors: 'rgba(232, 241, 242, 0.6)' } } },
+                fill: { opacity: 0.85 },
+                tooltip: { theme: 'dark' }
+            };
+
+            const targetEl = document.querySelector("#chart-team-productivity");
+            if (targetEl) {
+                chartInstances['team'] = new ApexCharts(targetEl, options);
+                chartInstances['team'].render();
+            }
+        }
+
+        // MECÂNICAS DE INTERAÇÃO GAMIFICADA (MASCOTE)
+        function feedMascot() {
+            // Modifica estado local com feedback reativo imediato
+            appState.userXp += 10;
+            appState.dragonHunger = Math.max(0, appState.dragonHunger - 10);
+            appState.dragonEnergy = Math.min(100, appState.dragonEnergy + 5);
+
+            // Sincroniza em tempo real elementos de UI injetados em múltiplas telas
+            document.getElementById('global-xp-display').innerText = appState.userXp.toLocaleString('pt-BR');
+            
+            const txtFome = document.getElementById('txt-fome');
+            const barFome = document.getElementById('bar-fome');
+            if (txtFome && barFome) {
+                txtFome.innerText = appState.dragonHunger + "%";
+                barFome.style.width = appState.dragonHunger + "%";
+            }
+
+            const txtEnergia = document.getElementById('txt-energia');
+            const barEnergia = document.getElementById('bar-energia');
+            if (txtEnergia && barEnergia) {
+                txtEnergia.innerText = appState.dragonEnergy + "%";
+                barEnergia.style.width = appState.dragonEnergy + "%";
+            }
+
+            // Animação de Micro-recompensa tátil no ícone
+            const dragonIcon = document.getElementById('dragon-icon');
+            if (dragonIcon) {
+                dragonIcon.classList.add('scale-125', 'neon-text-glow');
+                setTimeout(() => { dragonIcon.classList.remove('scale-125', 'neon-text-glow'); }, 400);
+            }
+        }
+
+        function triggerMascotTraining() {
+            appState.userXp += 25;
+            appState.dragonEnergy = Math.max(0, appState.dragonEnergy - 15);
+            appState.dragonHunger = Math.min(100, appState.dragonHunger + 10);
+
+            document.getElementById('global-xp-display').innerText = appState.userXp.toLocaleString('pt-BR');
+            
+            const txtEnergia = document.getElementById('txt-energia');
+            const barEnergia = document.getElementById('bar-energia');
+            if (txtEnergia && barEnergia) {
+                txtEnergia.innerText = appState.dragonEnergy + "%";
+                barEnergia.style.width = appState.dragonEnergy + "%";
+            }
+
+            const txtFome = document.getElementById('txt-fome');
+            const barFome = document.getElementById('bar-fome');
+            if (txtFome && barFome) {
+                txtFome.innerText = appState.dragonHunger + "%";
+                barFome.style.width = appState.dragonHunger + "%";
+            }
+        }
+
+        // MÓDULO INTERATIVO MOBILE LAYOUT RESILIENTE
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const icon = document.getElementById('mobile-menu-icon');
+            
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                sidebar.classList.add('flex', 'w-full', 'fixed', 'left-0', 'top-0', 'bottom-0');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                sidebar.classList.add('hidden');
+                sidebar.classList.remove('flex', 'w-full', 'fixed', 'left-0', 'top-0', 'bottom-0');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- Link para o css -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!--Ainda em criação-->
+    <link rel="icon" type="image/x-icon" href="/assets/images/logocortada.png">
+    <title>Apiscale - Evolua. Construa. Domine.</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg sticky-menu" style="background-color: #0f172ace;" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+                    <img src="assets/images/logo.png" alt="Logo Apiscale">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto gap-lg-3">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#ferramentas">Ferramentas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#jornadas">Jornadas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./assets/pages/Suporte.html">Suporte</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="./assets/pages/planos.html">Planos</a>
+                        </li>
+                    </ul>
+                    <a href="./assets/pages/login.html"><button type="button" class="btn btn-comecar fw-bold">Começar
+                            Agora</button></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <!-- Usado para os efeitos de partículas no fundo -->
+        <div class="particles-bg">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Texto -->
+                <div class="col-lg-6 col-12 hero-content text-center text-lg-start">
+
+                    <div class="hero-badge">
+                        Plataforma Gamificada de Desenvolvimento
+                    </div>
+
+                    <h1 class="hero-title">
+                        Planeje sua trajetória com
+                        <span class="text-highlight">estratégia</span>
+                        e
+                        <span class="text-highlight">clareza</span>.
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        Evolua suas habilidades através de jornadas personalizadas,
+                        conquistas e acompanhamento inteligente.
+                    </p>
+
+                    <div class="d-flex gap-3 mt-4 justify-content-center justify-content-lg-start">
+                        <a href="./assets/pages/login.html" class="btn btn-iniciar">
+                            Iniciar Jornada
+                        </a>
+
+                        <a href="./assets/pages/Demonstracao.html" class="btn btn-demo">
+                            Ver Demo
+                        </a>
+                    </div>
+
+                </div>
+
+                <!-- Dragões -->
+                <div class="col-lg-6 d-none d-lg-flex justify-content-center">
+
+                    <div class="hero-dragons">
+                        <div class="dragon-frame mentor-frame"><img src="assets/images/DragãoMentor.png"
+                                class="dragon-mentor" alt="Dragão Mentor"></div>
+
+                        <div class="dragon-frame apprentice-frame"><img src="assets/images/DragãoAprendiz.png"
+                                class="dragon-apprentice" alt="Dragão Aprendiz"></div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <a href="#sobre" class="scroll-arrow">
+
+            <i class="bi bi-chevron-double-down"></i>
+
+        </a>
+    </section>
+
+
+
+    <!--Explicação e informações gerais do projeto de forma simplificada, com mascostes gerados por is como forma de demonstração da gamificação que será implementada-->
+    <main>
+        <section class="about-cards-background">
+            <section class="Cards-hero">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="d-flex justify-content-center col-md-4 col-12 text-center mb-3">
+                            <div class="card card-hero h-100">
+                                <div class="elipse-icon"><i class="bi bi-bar-chart-fill neon-vazado"></i></div>
+                                <div class="card-body">
+                                    <h5 class="card-title"> Acompanhamento de Progresso
+                                    </h5>
+                                    <p class="card-text">Visualize o avanço de cada colaborador em tempo real
+                                        através de métricas, níveis de evolução e indicadores
+                                        personalizados para cada jornada.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center col-md-4 col-12 text-center mb-3">
+                            <div class="card card-hero h-100">
+                                <div class="elipse-icon"><i class="bi bi-calendar-check-fill neon-vazado"></i></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Trilhas Personalizadas</h5>
+                                    <p class="card-text">Monte jornadas adaptáveis para diferentes cargos,
+                                        equipes e objetivos, permitindo que a empresa evolua
+                                        seus talentos de forma estratégica.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center col-md-4 col-12 text-center mb-3">
+                            <div class="card card-hero h-100">
+                                <div class="elipse-icon"><i class="bi bi-shield-lock-fill neon-vazado"></i></div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Gestão Segura de Dados</h5>
+                                    <p class="card-text">Centralize informações, avaliações e desempenho dos
+                                        colaboradores em um ambiente moderno, protegido e
+                                        acessível para gestores e equipes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section id="sobre" class="about-section">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h6 class="fw-bold text-uppercase mb-3 text-style">O Conceito</h6>
+                            <h2 class="display-5 fw-bold mb-4 text-white">A Sincronia da <span
+                                    class="text-highlight">Colmeia</span> com a Sabedoria do <span
+                                    class="text-highlight">Dragão</span></h2>
+
+                            <div class="concept-box mb-4">
+                                <p class="mb-4">
+                                    O <strong>Apiscale</strong> une dois mundos fundamentais para o sucesso de qualquer
+                                    negócio:
+                                </p>
+
+                                <div class="d-flex gap-3 mb-3">
+                                    <i class="bi bi-hexagon-fill text-primary-emphasis fs-3"></i>
+                                    <p>
+                                        <strong>APIS (Colmeia):</strong> Representa a colaboração e organização. Como em
+                                        uma
+                                        colmeia, focamos na sincronia do time para alcançar resultados coletivos
+                                        extraordinários.
+                                    </p>
+                                </div>
+
+                                <div class="d-flex gap-3">
+                                    <i class="fas fa-dragon text-primary-emphasis fs-3"></i>
+                                    <p>
+                                        <strong>SCALE (Escama):</strong> Remete às escamas do dragão. Simboliza a
+                                        sabedoria
+                                        acumulada, a proteção estratégica e a força individual necessária para voar
+                                        alto.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <p>
+                                Nosso objetivo é transformar empresas em organismos eficientes e colaboradores em
+                                líderes
+                                sábios.
+                            </p>
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <div class="about-img-box">
+                                <img src="assets/images/sobreImg.webp" alt="Dragão de exemplo para a imagem"
+                                    class="img-fluid floating-img">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Team section moved below the 'jornadas' section -->
+                </div>
+            </section>
+        </section>
+
+        <section class="stats">
+
+            <div class="container">
+
+                <div class="stat-card">
+
+                    <span class="counter" data-target="75">0</span>
+                    <p>Conteúdo Desenvolvido</p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span class="counter" data-target="50">0</span>
+                    <p>Trilhas Estruturadas</p>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <span class="counter" data-target="25">0</span>
+                    <p>Plataforma Implementada</p>
+
+                </div>
+
+              
+
+            </div>
+
+        </section>
+        <section id="ferramentas" class="overlap-section">
+            <div class="container">
+                <div class="row g-4 gy-4">
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-chart-bar fa-2x neon-vazado"></i></div>
+                            <h6>Planeje Suas Ações</h6>
+                            <p>Transforme metas em planos de ação claros, definindo responsáveis, prazos e métodos de
+                                execução.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-bullseye fa-2x neon-vazado"></i></div>
+                            <h6>Defina Metas</h6>
+                            <p>Defina objetivos ambiciosos e acompanhe resultados-chave em tempo real para toda a
+                                empresa.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-chart-pie fa-2x neon-vazado"></i></div>
+                            <h6>Visualização Fácil</h6>
+                            <p>Visualize indicadores de performance através de gráficos inteligentes para decisões
+                                baseadas em dados.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-stopwatch fa-2x neon-vazado"></i></div>
+                            <h6>Gerencie o Tempo</h6>
+                            <p>Controle prazos e marcos críticos de múltiplos projetos em uma visão unificada e
+                                intuitiva.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-sync-alt fa-2x neon-vazado"></i></div>
+                            <h6>Sincronia de Time</h6>
+                            <p>Centralize a comunicação estratégica e garanta que cada membro da equipe esteja alinhado
+                                aos objetivos do grupo.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="feature-card p-4 shadow-sm text-white">
+                            <div class="icon-box mb-3"><i class="fas fa-user-graduate fa-2x neon-vazado"></i></div>
+                            <h6>Tenha Seu Plano Pessoal</h6>
+                            <p>Transforme suas ambições em um plano claro, conectando seus sonhos pessoais ao
+                                crescimento da empresa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="evolution">
+            <div class="container">
+
+                <div class="text-center mb-5">
+                    <h2 class="section-title">Sua Evolução na Jornada</h2>
+                    <p class="section-description">
+                        Cada habilidade adquirida fortalece seu dragão e aproxima você
+                        de novos desafios.
+                    </p>
+                </div>
+
+                <div class="evolution-wrapper">
+                    <div class="progress-line"></div>
+                    <div class="stage egg">
+                        <img src="/assets/images/EggDragon.png" alt="Ovo de Dragão">
+                        <h3>Iniciante</h3>
+                        <p>Escolha sua jornada.</p>
+                    </div>
+
+                    <div class="path"></div>
+
+                    <div class="stage baby">
+                        <img src="/assets/images/BabyDragon.png" alt="Filhote de Dragão">
+                        <h3>Aprendiz</h3>
+                        <p>Desenvolva novas habilidades.</p>
+                    </div>
+
+                    <div class="path"></div>
+
+                    <div class="stage adult">
+                        <img src="/assets/images/AdultDragon.png" alt="Dragão Adulto">
+                        <h3>Especialista</h3>
+                        <p>Conquiste seus objetivos.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO TRILHAS -->
+        <section id="jornadas" class="secao-trilhas py-5">
+            <div class="container-fluid">
+
+                <!-- TOPO -->
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="col-lg-8">
+
+                        <span class="subtitulo-jornada d-inline-block mb-3">
+                            Jornadas Inteligentes
+                        </span>
+
+                        <h2 class="titulo-jornada mb-4">
+                            Crie trilhas personalizadas para desenvolver equipes com estratégia
+                        </h2>
+
+                        <p class="descricao-jornada">
+                            As jornadas apresentadas são apenas exemplos das possibilidades da plataforma.
+                            No Apiscale, cada empresa pode criar trilhas únicas conforme suas necessidades,
+                            objetivos e o momento de evolução da equipe.
+                        </p>
+
+                    </div>
+                </div>
+
+
+
+                <div class="container-trilhas">
+                    <!-- CARD 1 -->
+                    <div class="card-trilha esquerda">
+                        <div class="area-dragao">
+                            <img src="assets/images/dragao-1.png" alt="Dragão Liderança">
+                        </div>
+
+                        <div class="conteudo-trilha">
+                            <span class="nivel">Avançado</span>
+
+                            <h2>Liderança</h2>
+
+                            <p>
+                                Desenvolva habilidades de liderança e aprenda a conduzir equipes
+                                rumo ao sucesso organizacional.
+                            </p>
+
+                            <button>Explorar Trilha</button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2 -->
+                    <div class="card-trilha direita">
+                        <div class="area-dragao">
+                            <img src="assets/images/dragao-2.png" alt="Dragão Desenvolvimento">
+                        </div>
+
+                        <div class="conteudo-trilha">
+                            <span class="nivel">Intermediário</span>
+
+                            <h2>Desenvolvimento</h2>
+
+                            <p>
+                                Aprimore suas habilidades técnicas e evolua no universo da programação.
+                            </p>
+
+
+                            <button>Explorar Trilha</button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3 -->
+                    <div class="card-trilha esquerda">
+                        <div class="area-dragao">
+                            <img src="assets/images/dragao-3.png" alt="Dragão Estratégia">
+                        </div>
+
+                        <div class="conteudo-trilha">
+                            <span class="nivel">Especialista</span>
+
+                            <h2>Estratégia</h2>
+
+                            <p>
+                                Desenvolva pensamento estratégico e visão de negócios para tomada
+                                de decisões inteligentes.
+                            </p>
+
+
+
+                            <button>Explorar Trilha</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="time" class="team-section py-5">
+            <div class="container py-5">
+                <h3 class="text-center fw-bold mb-5 mt-5 text-white">O
+                    <span class="text-primary-emphasis neon-sobre-wevers">Time</span> por trás do Projeto
+                </h3>
+
+                <div class="row g-4 justify-content-center mb-4">
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/BielPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Gabriel Pinheiro</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/IsaPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Isabella De Oliveira</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/LucasPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Lucas Oliveira Dos Santos Conceição</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/MillenaPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Millena Santos Campioto</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/PedroPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Pedro Silva Rocha</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="team-card">
+                            <div class="team-img-box mb-3">
+                                <img src="/assets/images/ThiagoPixelArt.png" alt="Foto de Gabriel Pinheiro" class="team-img">
+                            </div>
+                            <h5 class="fw-bold mb-1">Thiago Vieira De Almeida</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-brand pointer">
+
+                <img src="/assets/images/logo.png" alt="Logo Apiscale" width="180px" class="mb-3">
+
+                <p>
+                    Desenvolva habilidades,
+                    acompanhe sua evolução
+                    e conquiste novas jornadas.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h4>Plataforma</h4>
+
+                <a href="#sobre">Sobre</a>
+                <a href="#jornadas">Jornadas</a>
+                <a href="#ferramentas">Ferramentas</a>
+                <a href="./assets/pages/planos.html">Planos</a>
+
+            </div>
+
+            <div class="footer-links">
+
+                <h4>Recursos</h4>
+
+                <a href="./assets/pages/Suporte.html">Suporte</a>
+                <a href="./assets/pages/Suporte.html">Contato</a>
+
+            </div>
+
+            <div class="footer-social">
+
+                <h4>Redes Sociais</h4>
+
+                <div class="icons">
+
+                    <i class="fab fa-instagram icon"></i>
+                    <i class="fab fa-linkedin icon"></i>
+                    <i class="fab fa-github icon"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Apiscale.
+                Todos os direitos reservados.
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="/assets/js/script.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
